@@ -1,0 +1,8 @@
+{
+  "name": "mars-client",
+  "version": "1.0.0",
+  "main": ".",
+  "author": "blackcat",
+  "license": "MIT",
+  "private": true
+}
