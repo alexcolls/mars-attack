@@ -33,7 +33,8 @@ def savePage(response, pagefilename='page'):
 
 
 if __name__ == "__main__":
-  victim = input("\n>  Insert website URL you wanna clone:\n >>>  ")
+  victim = input("\n > Insert website URL you wanna clone:\n >>> ")
+  print('\nClonning website... It may take some time...\n')
   session = requests.Session()
   response = session.get('https://'+victim)
   savePage(response, victim.split('.')[0])
