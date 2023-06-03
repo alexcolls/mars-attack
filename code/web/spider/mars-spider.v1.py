@@ -3,7 +3,7 @@ import requests
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 
-def soupfindAllnSave(pagefolder, url, soup, tag2find='img', inner='out'):
+def soupfindAllnSave(pagefolder, url, soup, tag2find='img', inner='src', outfolder='out'):
   if not os.path.exists(pagefolder): # create only once
     os.mkdir(pagefolder)
   for res in soup.findAll(tag2find):   # images, css, etc..
@@ -20,20 +20,21 @@ def soupfindAllnSave(pagefolder, url, soup, tag2find='img', inner='out'):
         print(exc, file=sys.stderr)
   return soup
 
-def savePage(response, pagefilename='page'):    
+def savePage(response, _pagefilename='page', _outfolder='out'):    
   url = response.url
   soup = BeautifulSoup(response.text)
-  pagefolder = pagefilename+'_files' # page contents 
+  pagefolder = _outfolder + '/' + _pagefilename # page contents 
   soup = soupfindAllnSave(pagefolder, url, soup, 'img', inner='src')
   soup = soupfindAllnSave(pagefolder, url, soup, 'link', inner='href')
   soup = soupfindAllnSave(pagefolder, url, soup, 'script', inner='src')    
-  with open(pagefilename+'.html', 'w') as file:
+  with open(_outfolder+'/'+_pagefilename+'.html', 'w') as file:
     file.write(soup.prettify())
   return soup
 
 
 if __name__ == "__main__":
-  victim = input("\n > Insert website URL you wanna clone:\n >>> ")
+  print("\nWelcome to *** mars-spider.v1.py ***\n\nA python3 script that allows you to clone any website by inserting just a url. For example: mars-attack.com")
+  victim = input("\n > Insert website URL you wanna clone:\n\n >>> ")
   print('\nClonning website... It may take some time...\n')
   session = requests.Session()
   response = session.get('https://'+victim)
