@@ -1,0 +1,5 @@
+http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
+http://books.toscrape.com/static/oscar/js/bootstrap3/bootstrap.min.js
+http://books.toscrape.com/static/oscar/js/oscar/ui.js
+http://books.toscrape.com/static/oscar/js/bootstrap-datetimepicker/bootstrap-datetimepicker.js
+http://books.toscrape.com/static/oscar/js/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.all.js

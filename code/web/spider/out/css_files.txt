@@ -1,0 +1,4 @@
+http://books.toscrape.com/static/oscar/favicon.ico
+http://books.toscrape.com/static/oscar/css/styles.css
+http://books.toscrape.com/static/oscar/js/bootstrap-datetimepicker/bootstrap-datetimepicker.css
+http://books.toscrape.com/static/oscar/css/datetimepicker.css
