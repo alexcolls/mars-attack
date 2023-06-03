@@ -65,7 +65,7 @@ def get_all_website_links(url):
 total_urls_visited = 0
 max_urls = 30
 
-def crawl(url, max_urls=max_urls):
+def crawl(url):
     """
     Crawls a web page and extracts all links.
     You'll find all links in `external_urls` and `internal_urls` global set variables.
@@ -79,7 +79,7 @@ def crawl(url, max_urls=max_urls):
     for link in links:
       if total_urls_visited > max_urls:
         break
-      crawl(link, max_urls=max_urls)
+      crawl(link)
         
 if __name__ == "__main__":
     crawl("https://www.thepythoncode.com")
