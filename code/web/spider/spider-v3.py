@@ -35,5 +35,5 @@ def savePage(response, pagefilename='page'):
 
 session = requests.Session()
 #... whatever requests config you need here
-response = session.get('https://www.santander.com')
-savePage(response, 'santander')
+response = session.get('https://www.caixabank.com')
+savePage(response, 'caixabank')
