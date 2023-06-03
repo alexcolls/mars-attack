@@ -27,7 +27,7 @@ def crawl(pages, depth=None):
         pages = indexed_url
     return indexed_url
 
-
-pagelist=["https://en.wikipedia.org/wiki/Python_%28programming_language%29"]
-urls = crawl(pagelist, depth=1)
-print( urls )
+if __name__ == "__main__":
+    pagelist=["https://santander.com"]
+    urls = crawl(pagelist, depth=1)
+    print( urls )
