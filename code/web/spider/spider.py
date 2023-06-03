@@ -66,24 +66,24 @@ total_urls_visited = 0
 max_urls = 30
 
 def crawl(url):
-    """
-    Crawls a web page and extracts all links.
-    You'll find all links in `external_urls` and `internal_urls` global set variables.
-    params:
-        max_urls (int): number of max urls to crawl, default is 30.
-    """
-    global total_urls_visited
-    total_urls_visited += 1
-    print(f"{YELLOW}[*] Crawling: {url}{RESET}")
-    links = get_all_website_links(url)
-    for link in links:
-      if total_urls_visited > max_urls:
-        break
-      crawl(link)
+  """
+  Crawls a web page and extracts all links.
+  You'll find all links in `external_urls` and `internal_urls` global set variables.
+  params:
+      max_urls (int): number of max urls to crawl, default is 30.
+  """
+  global total_urls_visited
+  total_urls_visited += 1
+  print(f"{YELLOW}[*] Crawling: {url}{RESET}")
+  links = get_all_website_links(url)
+  for link in links:
+    if total_urls_visited > max_urls:
+      break
+    crawl(link)
         
 if __name__ == "__main__":
-    crawl("https://www.thepythoncode.com")
-    print("[+] Total Internal links:", len(internal_urls))
-    print("[+] Total External links:", len(external_urls))
-    print("[+] Total URLs:", len(external_urls) + len(internal_urls))
-    print("[+] Total crawled URLs:", max_urls)
+  crawl("https://www.thepythoncode.com")
+  print("[+] Total Internal links:", len(internal_urls))
+  print("[+] Total External links:", len(external_urls))
+  print("[+] Total URLs:", len(external_urls) + len(internal_urls))
+  print("[+] Total crawled URLs:", max_urls)
