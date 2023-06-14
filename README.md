@@ -1,2 +1,2 @@
 # mars-attack
-Swiss Knife kit.
+Swissknife kit.
