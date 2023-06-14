@@ -1,2 +1,2 @@
 # mars-attack
-Let's hack
+Swiss Knife kit.
