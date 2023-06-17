@@ -1,0 +1,28 @@
+{
+  "name": "bootbox.js",
+  "main": "./bootbox.js",
+  "license": "MIT",
+  "ignore": [
+    "CHANGELOG.md",
+    "CONTRIBUTING",
+    "Gruntfile.js",
+    "header.txt",
+    "karma*.js",
+    "build",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": ">= 3.3.7"
+  },
+  "homepage": "https://github.com/makeusabrew/bootbox",
+  "version": "5.5.3",
+  "_release": "5.5.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "v5.5.3",
+    "commit": "b6e0fc20a919f1d5ecc5710cd885fa76887696b2"
+  },
+  "_source": "https://github.com/makeusabrew/bootbox.git",
+  "_target": "^5.4.0",
+  "_originalSource": "bootbox.js"
+}
