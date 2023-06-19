@@ -2,6 +2,11 @@ import os, sys
 import requests
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
+import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+from time import sleep
+
 
 def soupfindAllnSave(pagefolder, url, soup, tag2find='img', inner='src', outfolder='out'):
   if not os.path.exists(pagefolder): # create only once
@@ -34,8 +39,24 @@ def savePage(response, _pagefilename='page', _outfolder='out'):
 
 if __name__ == "__main__":
   print("\nWelcome to *** mars-spider.v1.py ***\n\nA python3 script that allows you to clone any website by inserting just a url. For example: mars-attack.com")
-  victim = input("\n > Insert website URL you wanna clone:\n\n >>> ")
+  url = input("\n > Insert website URL you wanna clone:\n\n >>> ")
   print('\nClonning website... It may take some time...\n')
   session = requests.Session()
-  response = session.get('https://'+victim)
-  savePage(response, victim.split('.')[0])
+  retry = Retry(connect=3, backoff_factor=0.5)
+  adapter = HTTPAdapter(max_retries=retry)
+  session.mount('http://', adapter)
+  session.mount('https://', adapter)
+  name=input("\n > Insert pishlet name:\n\n >>> ")
+  i = 0
+  notDownloaded = True
+  while notDownloaded:
+    i += 1
+    print('\n', i, '\nCloning website... It may take some time...\n', url, ' ...\n')
+    try:
+      
+      response = session.get(url)
+      savePage(response, url.split('.')[0])
+      notDownloaded = False
+    except:
+      sleep(3)
+      print('\n\ncrashed...', url)
