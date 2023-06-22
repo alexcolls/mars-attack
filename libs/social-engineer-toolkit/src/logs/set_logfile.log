@@ -1,0 +1,2 @@
+ERROR: 2023-06-19 20:01:18.332918: local variable 'src' referenced before assignment
+ERROR: 2023-06-21 21:07:17.773432: local variable 'src' referenced before assignment
