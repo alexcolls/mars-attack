@@ -1,0 +1,1203 @@
+
+
+
+
+<!DOCTYPE HTML>
+<html lang="es">
+    <head>
+	
+	
+	
+	<meta charset="UTF-8"/>
+	<title>Localizar envíos, oficinas y códigos postales| Correos.es</title>
+	<meta name="template" content="home"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+	<script>
+	var id_token_ss = sessionStorage.getItem('cal.CORREOSID.portalcorreos.id_token');
+	var has_cookie = document.cookie.includes("NEOAEMSTAMP");
+	var cookie_stamp = null;
+	if (has_cookie) {
+		var v = document.cookie.match('(^|;) ?' + "NEOAEMSTAMP" + '=([^;]*)(;|$)');
+		cookie_stamp = v ? v[2] : null; 
+	}
+	var ss_stamp = sessionStorage.getItem('cal.CORREOSID.portalcorreos.date_expire');
+	var environmentApiHostAEM = document.querySelector('meta[name="environmentApiHostAEM"]');
+	if (environmentApiHostAEM != null) {
+		environmentApiHostAEM = environmentApiHostAEM.content + "/jcr:content.login.json";
+	} else {
+		environmentApiHostAEM = document.location.pathname + "/jcr:content.login.json";
+	}
+	if ((id_token_ss == null || cookie_stamp !== ss_stamp) && has_cookie && environmentApiHostAEM != null) {
+		fetch(environmentApiHostAEM).then((response) => {
+			if(response.status == '200') {
+				return response.json();
+			} else {
+				throw new Error;
+			}
+		}).then (response => {
+			sessionStorage.setItem('cal.CORREOSID.portalcorreos.id_token', response.id_token);
+			sessionStorage.setItem('cal.CORREOSID.portalcorreos.refresh_token', response.refresh_token);
+			sessionStorage.setItem('cal.CORREOSID.portalcorreos.date_expire', response.date_expire);
+		})
+		.catch( error => {
+			sessionStorage.removeItem("cal.CORREOSID.portalcorreos.id_token");
+			sessionStorage.removeItem("cal.CORREOSID.portalcorreos.refresh_token");
+			sessionStorage.removeItem("cal.CORREOSID.portalcorreos.date_expire");
+		});
+	}
+	if (id_token_ss != null && !has_cookie) {
+		sessionStorage.removeItem("cal.CORREOSID.portalcorreos.id_token");
+		sessionStorage.removeItem("cal.CORREOSID.portalcorreos.refresh_token");
+		sessionStorage.removeItem("cal.CORREOSID.portalcorreos.date_expire");
+	}
+</script>
+	
+
+	
+
+
+
+
+	<meta name="facebook-domain-verification" content="e01w360tgtho029s2e0qrmqdrbnh8l"/>
+
+
+
+
+
+
+<meta name="description" content="Localiza tu envío, una oficina o cualquier código postal. Información sobre todos nuestros productos y servicios. Contratación online. "/>
+<meta name="robots" content="index,follow"/>
+
+
+<link rel="canonical" href="https://www.correos.es/es/es/particulares"/>
+<link rel="alternate" href="https://www.correos.es/es/es/particulares" hreflang="x-default"/>
+
+  <link rel="alternate" hreflang="ca-ES" href="https://www.correos.es/es/ca/particulars"/>
+
+  <link rel="alternate" hreflang="en-ES" href="https://www.correos.es/es/en/individuals"/>
+
+  <link rel="alternate" hreflang="es-ES" href="https://www.correos.es/es/es/particulares"/>
+
+  <link rel="alternate" hreflang="gl-ES" href="https://www.correos.es/es/gl/particulares"/>
+
+  <link rel="alternate" hreflang="va-ES" href="https://www.correos.es/es/va/particulars"/>
+
+  <link rel="alternate" hreflang="eu-ES" href="https://www.correos.es/es/eu/partikularrak"/>
+
+
+
+<meta name="type" content="particulares"/>
+
+
+<meta property="og:title" content="Bienvenido a Correos.es - El Portal Online de Correos"/>
+<meta property="og:description" content="Localiza tu envío, una oficina o cualquier código postal. Información sobre todos nuestros productos y servicios. Contratación online. "/>
+<meta property="og:image" itemprop="image" content="https://www.correos.es/content/dam/correos/imagenes/iconos/CORREOS-1000x1000.png"/>
+<meta property="og:image:secure_url" content="https://www.correos.es/content/dam/correos/imagenes/iconos/CORREOS-1000x1000.png"/>
+<meta property="og:image:type" content="image/png"/>
+<meta property="og:image:width" content="1000"/>
+<meta property="og:image:height" content="1000"/>
+<meta property="og:url" content="https://www.correos.es/es/es/particulares"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:title" content="Bienvenido a Correos.es - El Portal Online de Correos"/>
+<meta name="twitter:description" content="Localiza tu envío, una oficina o cualquier código postal. Información sobre todos nuestros productos y servicios. Contratación online. "/>
+<meta name="twitter:url" content="https://www.correos.es/es/es/particulares"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:site" content="@correos"/>
+
+
+<meta name="autor" content="Grupo Correos"/>
+<meta name="organization" content="Sociedad Estatal de Correos y Tel&eacute;grafos, S.A."/>
+
+
+
+<meta name="environmentApiHost" content="https://api1.correos.es"/>
+<meta name="environmentApiHostAzure" content="https://apicorp.correos.es"/>
+<meta name="environmentApiHostCorreosId" content="https://apicorreosidservices.correos.es"/>
+<meta name="environmentApplicationOid" content="51058cef-6554-483d-a1ff-ca60b4e2694d"/>
+<meta name="environmentcacheLocation" content="sessionStorage"/>
+<meta name="environmentApiHostAEM" content="/content/correos/es/es"/>
+<meta name="environmentTypeRoute" content="PB"/>
+<meta name="environmentUrlLogOutRedirect" content="https://mioficina.correos.es/es/es/login"/>
+<meta name="environmentLanguage" content="ES"/>
+
+<link rel="stylesheet" href="/etc/clientlibs/correoslibs/correos-ui-kit.css?numero=715c555a17f03c84f84c9a81f9f31156" id="components-css"/>
+<script nomodule="" src="/etc/clientlibs/correoslibs/correos-ui-kit.js?numero=504ec258007ea731b3d5036d87be1e4b" id="component-js"></script>
+<script type="module" src="/etc/clientlibs/correoslibs/correos-ui-kit.esm.js?numero=a2adbf1b54555e7bffb00c09f70430f9" id="component-js-module"></script>
+
+
+    
+<script src="/etc.clientlibs/correos/clientlibs/clientlib-dependencies.min.d41d8cd98f00b204e9800998ecf8427e.js"></script>
+
+
+
+
+    
+<link rel="stylesheet" href="/etc.clientlibs/correos/clientlibs/clientlib-base.min.7d250654d6a4ba422176cd385b93bb36.css" type="text/css">
+
+
+
+
+
+
+<script src="//assets.adobedtm.com/31e842d3af0a/e239f3676926/launch-22ce7a1a18b2.min.js" async></script>
+
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-MX9JL63');</script>
+
+
+<script type="text/javascript">
+  var digitalData = {};
+</script>
+
+
+	<script type="application/javascript" src="https://uimarketpro.com/js/31d93afad6b167cce0ac3580169a7ce4.js"></script>
+
+
+
+
+	
+    
+    
+
+    
+
+    
+    
+
+
+
+    
+    
+<link rel="stylesheet" href="/etc.clientlibs/correos/clientlibs/clientlib-dependencies.min.d41d8cd98f00b204e9800998ecf8427e.css" type="text/css">
+<link rel="stylesheet" href="/etc.clientlibs/correos/clientlibs/clientlib-site.min.d41d8cd98f00b204e9800998ecf8427e.css" type="text/css">
+
+
+
+    
+
+	
+
+    <link rel="icon" type="image/ico" href="https://www.correos.es/content/dam/correos/imagenes/iconos/CORREOS-favicon.ico" sizes="32x32"/>
+    <link rel="icon" type="image/ico" href="https://www.correos.es/content/dam/correos/imagenes/iconos/CORREOS-favicon.ico" sizes="128x128"/>
+    <link rel="icon" type="image/ico" href="https://www.correos.es/content/dam/correos/imagenes/iconos/CORREOS-favicon.ico" sizes="152x152"/>
+    <link rel="icon" type="image/ico" href="https://www.correos.es/content/dam/correos/imagenes/iconos/CORREOS-favicon.ico" sizes="167x167"/>
+    <link rel="icon" type="image/ico" href="https://www.correos.es/content/dam/correos/imagenes/iconos/CORREOS-favicon.ico" sizes="180x180"/>
+    <link rel="icon" type="image/ico" href="https://www.correos.es/content/dam/correos/imagenes/iconos/CORREOS-favicon.ico" sizes="192x192"/>
+    <link rel="icon" type="image/ico" href="https://www.correos.es/content/dam/correos/imagenes/iconos/CORREOS-favicon.ico" sizes="512x512"/>
+    
+    <!-- Android -->
+    <link rel="shortcut icon" type="image/ico" href="https://www.correos.es/content/dam/correos/imagenes/iconos/CORREOS-favicon.ico" sizes="192x192"/>
+    
+    <!-- iOS -->
+    <link rel="apple-touch-icon" type="image/ico" href="https://www.correos.es/content/dam/correos/imagenes/iconos/CORREOS-favicon.ico" sizes="128x128"/>
+    <link rel="apple-touch-icon" type="image/ico" href="https://www.correos.es/content/dam/correos/imagenes/iconos/CORREOS-favicon.ico" sizes="152x152"/>
+    <link rel="apple-touch-icon" type="image/png" href="https://www.correos.es/content/dam/correos/imagenes/iconos/CORREOS-favicon.ico" sizes="167x167"/>
+    <link rel="apple-touch-icon" type="image/ico" href="https://www.correos.es/content/dam/correos/imagenes/iconos/CORREOS-favicon.ico" sizes="180x180"/>   
+    
+    <meta name="msapplication-square310x310logo" content="https://www.correos.es/content/dam/correos/imagenes/iconos/CORREOS-favicon.ico"/>
+    <meta name="msapplication-wide310x150logo" content="https://www.correos.es/content/dam/correos/imagenes/iconos/CORREOS-favicon.ico"/>
+    <meta name="msapplication-square150x150logo" content="https://www.correos.es/content/dam/correos/imagenes/iconos/CORREOS-favicon.ico"/>
+    <meta name="msapplication-square70x70logo" content="https://www.correos.es/content/dam/correos/imagenes/iconos/CORREOS-favicon.ico"/>
+
+</head>
+    <body class="page basicpage" data-pagename="correosweb:particulares">
+	    
+	    	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MX9JL63" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	    
+        
+        
+            
+
+
+
+            
+<div class="root responsivegrid">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="experiencefragment aem-GridColumn aem-GridColumn--default--12">
+<div id="experiencefragment-63e552fdb1" class="cmp-experiencefragment cmp-experiencefragment--header">
+
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="coreheader aem-GridColumn aem-GridColumn--default--12">
+	<correos-cdk-core-header band-select="{&#34;literals&#34;:[]}" logo-src='/content/dam/correos/imagenes/ilustraciones/logos/LogoCornamusa.svg' current-lang='es' fixed logo-href='/es/es/particulares' logo-target='_self' literals='{&#34;txtSecondaryNavDesc&#34;:&#34;Menú de segundo nivel&#34;,&#34;txtMenuButtonDesc&#34;:&#34;Menú&#34;,&#34;txtPrimaryNavDesc&#34;:&#34;Menú de primer nivel&#34;,&#34;txtLangDesc&#34;:&#34;Selección de idiomas&#34;,&#34;txtGoBack&#34;:&#34;Volver&#34;,&#34;txtGoBackDesc&#34;:&#34;Volver al menú principal&#34;}' navigation='[{&#34;children&#34;:[{&#34;targetLink&#34;:&#34;_self&#34;,&#34;icon&#34;:&#34;icon-home&#34;,&#34;name&#34;:&#34;Inicio&#34;,&#34;id&#34;:&#34;inicio&#34;,&#34;href&#34;:&#34;/es/es/particulares&#34;,&#34;titleLink&#34;:&#34;Inicio&#34;},{&#34;children&#34;:[{&#34;children&#34;:[],&#34;name&#34;:&#34;Localiza tu envío&#34;,&#34;id&#34;:&#34;localiza-tu-envío&#34;,&#34;href&#34;:&#34;/es/es/particulares/recibir/localiza-tu-envio&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Buzón de vacaciones&#34;,&#34;id&#34;:&#34;buzón-de-vacaciones&#34;,&#34;href&#34;:&#34;/es/es/particulares/recibir/planifica-tus-entregas/buzon-de-vacaciones&#34;},{&#34;name&#34;:&#34;Reenvío postal&#34;,&#34;id&#34;:&#34;reenvío-postal&#34;,&#34;href&#34;:&#34;/es/es/particulares/recibir/planifica-tus-entregas/reenvio-postal&#34;},{&#34;name&#34;:&#34;Apartado postal&#34;,&#34;id&#34;:&#34;apartado-postal&#34;,&#34;href&#34;:&#34;/es/es/particulares/recibir/planifica-tus-entregas/apartado-postal&#34;}],&#34;name&#34;:&#34;Planifica tus entregas&#34;,&#34;id&#34;:&#34;planifica-tus-entregas&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Citypaq&#34;,&#34;id&#34;:&#34;citypaq&#34;,&#34;href&#34;:&#34;/es/es/particulares/recibir/nuestros-puntos-de-entrega-y-recogida/citypaq&#34;},{&#34;name&#34;:&#34;Oficinas de Correos&#34;,&#34;id&#34;:&#34;oficinas-de-correos&#34;,&#34;href&#34;:&#34;/es/es/particulares/recibir/nuestros-puntos-de-entrega-y-recogida/oficinas-de-correos&#34;}],&#34;name&#34;:&#34;Nuestros puntos de entrega y recogida&#34;,&#34;id&#34;:&#34;nuestros-puntos-de-entrega-y-recogida&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Quiero modificar la entrega&#34;,&#34;id&#34;:&#34;quiero-modificar-la-entrega&#34;,&#34;href&#34;:&#34;/es/es/particulares/recibir/esperando-la-entrega/quiero-modificar-la-entrega&#34;}],&#34;name&#34;:&#34;Esperando la entrega&#34;,&#34;id&#34;:&#34;esperando-la-entrega&#34;},{&#34;children&#34;:[],&#34;name&#34;:&#34;Recibe muestras gratis en tu buzón&#34;,&#34;id&#34;:&#34;recibe-muestras-gratis-en-tu-buzón&#34;,&#34;href&#34;:&#34;/es/es/particulares/recibir/recibe-muestras-gratis-en-tu-buzon&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Importación en Península y Baleares&#34;,&#34;id&#34;:&#34;importación-en-península-y-baleares&#34;,&#34;href&#34;:&#34;/es/es/particulares/recibir/tramitacion-aduanera-en-la-importacion/importacion-en-peninsula-y-baleares&#34;},{&#34;name&#34;:&#34;Importación en Canarias&#34;,&#34;id&#34;:&#34;importación-en-canarias&#34;,&#34;href&#34;:&#34;/es/es/particulares/recibir/tramitacion-aduanera-en-la-importacion/importacion-en-canarias&#34;},{&#34;name&#34;:&#34;Importación en Ceuta&#34;,&#34;id&#34;:&#34;importación-en-ceuta&#34;,&#34;href&#34;:&#34;/es/es/particulares/recibir/tramitacion-aduanera-en-la-importacion/importacion-en-ceuta&#34;},{&#34;name&#34;:&#34;Importación en Melilla&#34;,&#34;id&#34;:&#34;importación-en-melilla&#34;,&#34;href&#34;:&#34;/es/es/particulares/recibir/tramitacion-aduanera-en-la-importacion/importacion-en-melilla&#34;}],&#34;name&#34;:&#34;Tramitación aduanera en la Importación&#34;,&#34;id&#34;:&#34;tramitación-aduanera-en-la-importación&#34;,&#34;href&#34;:&#34;/es/es/particulares/recibir/tramitacion-aduanera-en-la-importacion&#34;}],&#34;targetLink&#34;:&#34;_self&#34;,&#34;icon&#34;:&#34;icon-recieve&#34;,&#34;name&#34;:&#34;Recibir&#34;,&#34;id&#34;:&#34;recibir&#34;,&#34;href&#34;:&#34;/es/es/particulares/recibir&#34;,&#34;titleLink&#34;:&#34;Recibir&#34;},{&#34;children&#34;:[{&#34;children&#34;:[{&#34;name&#34;:&#34;Envíos económicos&#34;,&#34;id&#34;:&#34;envíos-económicos&#34;,&#34;href&#34;:&#34;/es/es/particulares/enviar/envios-nacionales/envios-economicos&#34;},{&#34;name&#34;:&#34;Envíos rápidos&#34;,&#34;id&#34;:&#34;envíos-rápidos&#34;,&#34;href&#34;:&#34;/es/es/particulares/enviar/envios-nacionales/envio-rapido&#34;},{&#34;name&#34;:&#34;Paq Frío&#34;,&#34;id&#34;:&#34;paq-frío&#34;,&#34;href&#34;:&#34;/es/es/particulares/enviar/envios-nacionales/paq-frio&#34;},{&#34;name&#34;:&#34;Burofax y cartas&#34;,&#34;id&#34;:&#34;burofax-y-cartas&#34;,&#34;href&#34;:&#34;/es/es/particulares/enviar/envios-nacionales/burofax-cartas&#34;},{&#34;name&#34;:&#34;Paq Maleta&#34;,&#34;id&#34;:&#34;paq-maleta&#34;,&#34;href&#34;:&#34;/es/es/particulares/enviar/envios-nacionales/paq-maleta&#34;},{&#34;name&#34;:&#34;Envío de bicicletas&#34;,&#34;id&#34;:&#34;envío-de-bicicletas&#34;,&#34;href&#34;:&#34;/es/es/particulares/enviar/envios-nacionales/envio-de-bicicletas&#34;}],&#34;name&#34;:&#34;Envíos nacionales&#34;,&#34;id&#34;:&#34;envíos-nacionales&#34;,&#34;href&#34;:&#34;/es/es/particulares/enviar/envios-nacionales&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Paquetes al extranjero&#34;,&#34;id&#34;:&#34;paquetes-al-extranjero&#34;,&#34;href&#34;:&#34;/es/es/particulares/enviar/enviar-al-extranjero/paquetes-al-extranjero&#34;},{&#34;name&#34;:&#34;Documentos al extranjero&#34;,&#34;id&#34;:&#34;documentos-al-extranjero&#34;,&#34;href&#34;:&#34;/es/es/particulares/enviar/enviar-al-extranjero/documentos-al-extranjero&#34;},{&#34;name&#34;:&#34;Zonas internacionales&#34;,&#34;id&#34;:&#34;zonas-internacionales&#34;,&#34;href&#34;:&#34;/es/es/particulares/enviar/enviar-al-extranjero/zonas-internacionales&#34;},{&#34;name&#34;:&#34;Gestión aduanera de exportación&#34;,&#34;id&#34;:&#34;gestión-aduanera-de-exportación&#34;,&#34;href&#34;:&#34;/es/es/particulares/enviar/enviar-al-extranjero/gestion-aduanera-de-exportacion&#34;}],&#34;name&#34;:&#34;Enviar al extranjero&#34;,&#34;id&#34;:&#34;enviar-al-extranjero&#34;,&#34;href&#34;:&#34;/es/es/particulares/enviar/enviar-al-extranjero&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Línea Bosques&#34;,&#34;id&#34;:&#34;línea-bosques&#34;,&#34;href&#34;:&#34;/es/es/particulares/enviar/sobre-y-embalajes/linea-bosques&#34;},{&#34;name&#34;:&#34;Prefanqueados&#34;,&#34;id&#34;:&#34;prefanqueados&#34;,&#34;href&#34;:&#34;/es/es/particulares/enviar/sobre-y-embalajes/prefanqueados&#34;},{&#34;name&#34;:&#34;Sobres y embalajes&#34;,&#34;id&#34;:&#34;sobres-y-embalajes&#34;,&#34;href&#34;:&#34;/es/es/particulares/enviar/sobre-y-embalajes/sobres-y-embalajes&#34;}],&#34;name&#34;:&#34;Sobre y embalajes&#34;,&#34;id&#34;:&#34;sobre-y-embalajes&#34;,&#34;href&#34;:&#34;/es/es/particulares/enviar/sobre-y-embalajes&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Portal de devoluciones&#34;,&#34;id&#34;:&#34;portal-de-devoluciones&#34;,&#34;href&#34;:&#34;/es/es/particulares/enviar/devolver-un-paquete/portal-de-devoluciones&#34;},{&#34;name&#34;:&#34;Devuelve con Citypaq&#34;,&#34;id&#34;:&#34;devuelve-con-citypaq&#34;,&#34;href&#34;:&#34;/es/es/particulares/enviar/devolver-un-paquete/devuelve-con-citypaq&#34;}],&#34;name&#34;:&#34;Devolver un paquete&#34;,&#34;id&#34;:&#34;devolver-un-paquete&#34;},{&#34;children&#34;:[],&#34;name&#34;:&#34;Comprar Sellos&#34;,&#34;id&#34;:&#34;comprar-sellos&#34;,&#34;href&#34;:&#34;/es/es/particulares/enviar/comprar-sellos&#34;}],&#34;targetLink&#34;:&#34;_self&#34;,&#34;icon&#34;:&#34;icon-send&#34;,&#34;name&#34;:&#34;Enviar&#34;,&#34;id&#34;:&#34;enviar&#34;,&#34;href&#34;:&#34;/es/es/particulares/enviar&#34;,&#34;titleLink&#34;:&#34;Enviar&#34;},{&#34;children&#34;:[{&#34;children&#34;:[{&#34;name&#34;:&#34;Giro Internacional&#34;,&#34;id&#34;:&#34;giro-internacional&#34;,&#34;href&#34;:&#34;/es/es/particulares/dinero-y-compras/envio-de-dinero/giro-internacional&#34;},{&#34;name&#34;:&#34;Western Union&#34;,&#34;id&#34;:&#34;western-union&#34;,&#34;href&#34;:&#34;/es/es/particulares/dinero-y-compras/envio-de-dinero/western-union&#34;},{&#34;name&#34;:&#34;Giro Nacional&#34;,&#34;id&#34;:&#34;giro-nacional&#34;,&#34;href&#34;:&#34;/es/es/particulares/dinero-y-compras/envio-de-dinero/giro-nacional&#34;}],&#34;name&#34;:&#34;Envío de dinero&#34;,&#34;id&#34;:&#34;envío-de-dinero&#34;,&#34;href&#34;:&#34;/es/es/particulares/dinero-y-compras/envio-de-dinero&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Tarjeta Correos Prepago&#34;,&#34;id&#34;:&#34;tarjeta-correos-prepago&#34;,&#34;href&#34;:&#34;/es/es/particulares/dinero-y-compras/lleva-el-control-de-tu-dinero-y-tus-gastos/tarjeta-correos-prepago&#34;},{&#34;name&#34;:&#34;Correos Cash&#34;,&#34;id&#34;:&#34;correos-cash&#34;,&#34;href&#34;:&#34;/es/es/particulares/dinero-y-compras/lleva-el-control-de-tu-dinero-y-tus-gastos/correos-cash&#34;},{&#34;name&#34;:&#34;Cambio de divisas a domicilio&#34;,&#34;id&#34;:&#34;cambio-de-divisas-a-domicilio&#34;,&#34;href&#34;:&#34;/es/es/particulares/dinero-y-compras/lleva-el-control-de-tu-dinero-y-tus-gastos/cambio-de-divisas-a-domicilio&#34;}],&#34;name&#34;:&#34;Lleva el control de tu dinero y tus gastos&#34;,&#34;id&#34;:&#34;lleva-el-control-de-tu-dinero-y-tus-gastos&#34;},{&#34;children&#34;:[],&#34;name&#34;:&#34;Compra en Correos Market&#34;,&#34;id&#34;:&#34;compra-en-correos-market&#34;,&#34;href&#34;:&#34;/es/es/particulares/dinero-y-compras/compra-en-correos-market&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Premios ONCE&#34;,&#34;id&#34;:&#34;premios-once&#34;,&#34;href&#34;:&#34;/es/es/particulares/dinero-y-compras/disponible-en-oficinas/premios-once&#34;}],&#34;name&#34;:&#34;Disponible en oficinas&#34;,&#34;id&#34;:&#34;disponible-en-oficinas&#34;}],&#34;targetLink&#34;:&#34;_self&#34;,&#34;icon&#34;:&#34;icon-shopping&#34;,&#34;name&#34;:&#34;Dinero y compras&#34;,&#34;id&#34;:&#34;dinero-y-compras&#34;,&#34;href&#34;:&#34;/es/es/particulares/dinero-y-compras&#34;,&#34;titleLink&#34;:&#34;Dinero y compras&#34;},{&#34;children&#34;:[{&#34;children&#34;:[{&#34;name&#34;:&#34;Transporte de mochilas&#34;,&#34;id&#34;:&#34;transporte-de-mochilas&#34;,&#34;href&#34;:&#34;/es/es/particulares/ocio-y-viajes/haz-el-camino-de-santiago-con-correos/transporte-de-mochilas&#34;},{&#34;name&#34;:&#34;Envío de maletas&#34;,&#34;id&#34;:&#34;envío-de-maletas&#34;,&#34;href&#34;:&#34;/es/es/particulares/ocio-y-viajes/haz-el-camino-de-santiago-con-correos/envio-de-maletas&#34;},{&#34;name&#34;:&#34;Consigna en Santiago&#34;,&#34;id&#34;:&#34;consigna-en-santiago&#34;,&#34;href&#34;:&#34;/es/es/particulares/ocio-y-viajes/haz-el-camino-de-santiago-con-correos/consigna-en-santiago&#34;}],&#34;name&#34;:&#34;Haz el Camino de Santiago con Correos&#34;,&#34;id&#34;:&#34;haz-el-camino-de-santiago-con-correos&#34;,&#34;href&#34;:&#34;/es/es/particulares/ocio-y-viajes/haz-el-camino-de-santiago-con-correos&#34;},{&#34;children&#34;:[],&#34;name&#34;:&#34;Entradas y viajes&#34;,&#34;id&#34;:&#34;entradas-y-viajes&#34;,&#34;href&#34;:&#34;/es/es/particulares/ocio-y-viajes/entradas-y-viajes&#34;},{&#34;children&#34;:[],&#34;name&#34;:&#34;Sellos y Filatelia&#34;,&#34;id&#34;:&#34;sellos-y-filatelia&#34;,&#34;href&#34;:&#34;/es/es/particulares/ocio-y-viajes/sellos-y-filatelia&#34;}],&#34;targetLink&#34;:&#34;_self&#34;,&#34;icon&#34;:&#34;icon-leisure&#34;,&#34;name&#34;:&#34;Viajes, Ocio y Filatelia&#34;,&#34;id&#34;:&#34;viajes,-ocio-y-filatelia&#34;,&#34;href&#34;:&#34;/es/es/particulares/ocio-y-viajes&#34;,&#34;titleLink&#34;:&#34;Viajes, Ocio y Filatelia&#34;},{&#34;children&#34;:[{&#34;children&#34;:[],&#34;name&#34;:&#34;Voto por correo&#34;,&#34;id&#34;:&#34;voto-por-correo&#34;,&#34;href&#34;:&#34;/es/es/particulares/para-el-ciudadano/voto-por-correo&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Servicios ORVE&#34;,&#34;id&#34;:&#34;servicios-orve&#34;,&#34;href&#34;:&#34;/es/es/particulares/para-el-ciudadano/tramites-con-la-administracion-publica/servicios-orve&#34;},{&#34;name&#34;:&#34;Buzón  Digital &#34;,&#34;id&#34;:&#34;buzón--digital-&#34;,&#34;href&#34;:&#34;/es/es/particulares/para-el-ciudadano/tramites-con-la-administracion-publica/buzon-digital&#34;}],&#34;name&#34;:&#34;Trámites con la Administración Pública&#34;,&#34;id&#34;:&#34;trámites-con-la-administración-pública&#34;},{&#34;children&#34;:[],&#34;name&#34;:&#34;Pago de recibos&#34;,&#34;id&#34;:&#34;pago-de-recibos&#34;,&#34;href&#34;:&#34;/es/es/particulares/para-el-ciudadano/pago-de-recibos&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Distintivo medioambiental&#34;,&#34;id&#34;:&#34;distintivo-medioambiental&#34;,&#34;href&#34;:&#34;/es/es/particulares/para-el-ciudadano/servicios-de-la-dgt/distintivo-medioambiental&#34;},{&#34;name&#34;:&#34;Informes de vehículos&#34;,&#34;id&#34;:&#34;informes-de-vehículos&#34;,&#34;href&#34;:&#34;/es/es/particulares/para-el-ciudadano/servicios-de-la-dgt/informes-de-vehiculos&#34;},{&#34;name&#34;:&#34;Duplicado permiso circulación&#34;,&#34;id&#34;:&#34;duplicado-permiso-circulación&#34;,&#34;href&#34;:&#34;/es/es/particulares/para-el-ciudadano/servicios-de-la-dgt/duplicado-permiso-circulacion&#34;},{&#34;name&#34;:&#34;Cambio de Titularidad&#34;,&#34;id&#34;:&#34;cambio-de-titularidad&#34;,&#34;href&#34;:&#34;/es/es/particulares/para-el-ciudadano/servicios-de-la-dgt/cambio-de-titularidad&#34;},{&#34;name&#34;:&#34;Notificación de venta de un vehículo&#34;,&#34;id&#34;:&#34;notificación-de-venta-de-un-vehículo&#34;,&#34;href&#34;:&#34;/es/es/particulares/para-el-ciudadano/servicios-de-la-dgt/notificacion-de-venta-de-un-vehiculo&#34;}],&#34;name&#34;:&#34;Servicios de la DGT&#34;,&#34;id&#34;:&#34;servicios-de-la-dgt&#34;,&#34;href&#34;:&#34;/es/es/particulares/para-el-ciudadano/servicios-de-la-dgt&#34;},{&#34;children&#34;:[],&#34;name&#34;:&#34;Tramites de la Agencia Tributaria&#34;,&#34;id&#34;:&#34;tramites-de-la-agencia-tributaria&#34;,&#34;href&#34;:&#34;/es/es/particulares/para-el-ciudadano/tramites-de-la-agencia-tributaria&#34;},{&#34;children&#34;:[],&#34;name&#34;:&#34;ConnectedLife Pets&#34;,&#34;id&#34;:&#34;connectedlife-pets&#34;,&#34;href&#34;:&#34;/es/es/particulares/para-el-ciudadano/connectedlife-pets&#34;}],&#34;targetLink&#34;:&#34;_self&#34;,&#34;icon&#34;:&#34;icon-communications&#34;,&#34;name&#34;:&#34;Para el ciudadano&#34;,&#34;id&#34;:&#34;para-el-ciudadano&#34;,&#34;href&#34;:&#34;/es/es/particulares/para-el-ciudadano&#34;,&#34;titleLink&#34;:&#34;Para el ciudadano&#34;}],&#34;name&#34;:&#34;Particular&#34;,&#34;id&#34;:&#34;particular&#34;},{&#34;children&#34;:[{&#34;children&#34;:[{&#34;children&#34;:[],&#34;name&#34;:&#34;Localizador de envíos&#34;,&#34;id&#34;:&#34;localizador-de-envíos&#34;,&#34;href&#34;:&#34;/es/es/herramientas/localizador&#34;},{&#34;children&#34;:[],&#34;name&#34;:&#34;Oficinas, buzones y Citypaq&#34;,&#34;id&#34;:&#34;oficinas,-buzones-y-citypaq&#34;,&#34;href&#34;:&#34;/es/es/herramientas/oficinas-buzones-citypaq&#34;},{&#34;children&#34;:[],&#34;name&#34;:&#34;Buscador Códigos Postales&#34;,&#34;id&#34;:&#34;buscador-códigos-postales&#34;,&#34;href&#34;:&#34;/es/es/herramientas/codigos-postales&#34;},{&#34;children&#34;:[],&#34;name&#34;:&#34;Formulario online de envíos de oficina&#34;,&#34;id&#34;:&#34;formulario-online-de-envíos-de-oficina&#34;,&#34;href&#34;:&#34;/es/es/herramientas/formulario-online-de-envios-de-oficina&#34;},{&#34;children&#34;:[],&#34;name&#34;:&#34;Gestión de estacionados&#34;,&#34;id&#34;:&#34;gestión-de-estacionados&#34;,&#34;href&#34;:&#34;/es/es/herramientas/gestion-de-estacionados&#34;},{&#34;children&#34;:[],&#34;name&#34;:&#34;Cotejo&#34;,&#34;id&#34;:&#34;cotejo&#34;,&#34;href&#34;:&#34;/es/es/herramientas/cotejo&#34;},{&#34;children&#34;:[],&#34;name&#34;:&#34;ADT Postales&#34;,&#34;id&#34;:&#34;adt-postales&#34;,&#34;href&#34;:&#34;/es/es/herramientas/adt-postales&#34;}],&#34;targetLink&#34;:&#34;_self&#34;,&#34;icon&#34;:&#34;icon-settings&#34;,&#34;name&#34;:&#34;Herramientas&#34;,&#34;id&#34;:&#34;herramientas&#34;,&#34;href&#34;:&#34;/es/es/herramientas&#34;,&#34;titleLink&#34;:&#34;Herramientas&#34;},{&#34;targetLink&#34;:&#34;_self&#34;,&#34;icon&#34;:&#34;icon-pago_card&#34;,&#34;name&#34;:&#34;Tarifas&#34;,&#34;id&#34;:&#34;tarifas&#34;,&#34;href&#34;:&#34;/es/es/tarifas&#34;,&#34;titleLink&#34;:&#34;Tarifas&#34;},{&#34;targetLink&#34;:&#34;_self&#34;,&#34;icon&#34;:&#34;icon-news&#34;,&#34;name&#34;:&#34;Actualidad&#34;,&#34;id&#34;:&#34;actualidad&#34;,&#34;href&#34;:&#34;/es/es/actualidad&#34;,&#34;titleLink&#34;:&#34;Actualidad&#34;},{&#34;relatedModal&#34;:&#34;&#34;,&#34;targetLink&#34;:&#34;_blank&#34;,&#34;icon&#34;:&#34;icon-cart&#34;,&#34;name&#34;:&#34;Tienda&#34;,&#34;id&#34;:&#34;tienda&#34;,&#34;href&#34;:&#34;https://market.correos.es/category/correos&#34;,&#34;titleLink&#34;:&#34;Tienda&#34;},{&#34;children&#34;:[{&#34;children&#34;:[{&#34;name&#34;:&#34;Cómo preparar el envío&#34;,&#34;id&#34;:&#34;cómo-preparar-el-envío&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/enviar/como-preparar-envio&#34;},{&#34;name&#34;:&#34;Cómo funciona Mi Oficina&#34;,&#34;id&#34;:&#34;cómo-funciona-mi-oficina&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/enviar/como-funciona-mi-oficina&#34;},{&#34;name&#34;:&#34;Dimensiones y pesos&#34;,&#34;id&#34;:&#34;dimensiones-y-pesos&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/enviar/dimensiones-y-pesos&#34;},{&#34;name&#34;:&#34;Tratamiento de tus datos&#34;,&#34;id&#34;:&#34;tratamiento-de-tus-datos&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/enviar/tratamiento-de-tus-datos&#34;},{&#34;name&#34;:&#34;Sellos y franqueo&#34;,&#34;id&#34;:&#34;sellos-y-franqueo&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/enviar/sellos-y-franqueo&#34;}],&#34;name&#34;:&#34;Enviar&#34;,&#34;id&#34;:&#34;enviar&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Recoger envío&#34;,&#34;id&#34;:&#34;recoger-envío&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/recibir/recoger-envio&#34;},{&#34;name&#34;:&#34;Código de envío&#34;,&#34;id&#34;:&#34;código-de-envío&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/recibir/codigo-de-envio&#34;},{&#34;name&#34;:&#34;Aviso de llegada&#34;,&#34;id&#34;:&#34;aviso-de-llegada&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/recibir/aviso-de-llegada&#34;},{&#34;name&#34;:&#34;Envíos estacionados&#34;,&#34;id&#34;:&#34;envíos-estacionados&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/recibir/envios-estacionados&#34;},{&#34;name&#34;:&#34;Incidencias&#34;,&#34;id&#34;:&#34;incidencias&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/recibir/incidencias&#34;}],&#34;name&#34;:&#34;Recibir&#34;,&#34;id&#34;:&#34;recibir&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Correos ID&#34;,&#34;id&#34;:&#34;correos-id&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/otras-consultas/correos-id&#34;}],&#34;name&#34;:&#34;Otras consultas&#34;,&#34;id&#34;:&#34;otras-consultas&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/otras-consultas&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;DUA Importación&#34;,&#34;id&#34;:&#34;dua-importación&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/informacion-aduanera/dua-importacion&#34;},{&#34;name&#34;:&#34;DUA Exportación&#34;,&#34;id&#34;:&#34;dua-exportación&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/informacion-aduanera/dua-exportacion&#34;},{&#34;name&#34;:&#34;Brexit, importación y exportación con el Reino Unido&#34;,&#34;id&#34;:&#34;brexit,-importación-y-exportación-con-el-reino-unido&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/informacion-aduanera/brexit&#34;},{&#34;name&#34;:&#34;Nuevo Proceso de Seguridad de Importación&#34;,&#34;id&#34;:&#34;nuevo-proceso-de-seguridad-de-importación&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/informacion-aduanera/nuevo-proceso-seguridad-importacion&#34;},{&#34;name&#34;:&#34;IVA de importación en el Comercio Electrónico &#34;,&#34;id&#34;:&#34;iva-de-importación-en-el-comercio-electrónico-&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/informacion-aduanera/iva-de-importacion-en-el-comercio-electronico&#34;}],&#34;name&#34;:&#34;Información aduanera&#34;,&#34;id&#34;:&#34;información-aduanera&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/informacion-aduanera&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Nacionales&#34;,&#34;id&#34;:&#34;nacionales&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/coberturas-y-garantias/nacionales&#34;},{&#34;name&#34;:&#34;Internacionales&#34;,&#34;id&#34;:&#34;internacionales&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/coberturas-y-garantias/internacionales&#34;}],&#34;name&#34;:&#34;Coberturas y garantías&#34;,&#34;id&#34;:&#34;coberturas-y-garantías&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/coberturas-y-garantias&#34;},{&#34;children&#34;:[],&#34;name&#34;:&#34;Tarifas&#34;,&#34;id&#34;:&#34;tarifas&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/tarifas&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Tratamiento de las incidencias/reclamaciones/consultas&#34;,&#34;id&#34;:&#34;tratamiento-de-las-incidencias/reclamaciones/consultas&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/tratamiento-de-las-incidencias-reclamaciones-consultas&#34;},{&#34;name&#34;:&#34;Da de alta tu incidencia/ reclamación&#34;,&#34;id&#34;:&#34;da-de-alta-tu-incidencia/-reclamación&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/da-de-alta-tu-incidencia-reclamacion&#34;},{&#34;name&#34;:&#34;Modifica o amplia información&#34;,&#34;id&#34;:&#34;modifica-o-amplia-información&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/modifica-o-amplia-informacion&#34;},{&#34;name&#34;:&#34;Conoce el estado de tu incidencia&#34;,&#34;id&#34;:&#34;conoce-el-estado-de-tu-incidencia&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/conoce-el-estado-de-tu-incidencia&#34;},{&#34;name&#34;:&#34;Solicita información&#34;,&#34;id&#34;:&#34;solicita-información&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/solicita-informacion&#34;}],&#34;name&#34;:&#34;Tu consulta/ tu reclamación&#34;,&#34;id&#34;:&#34;tu-consulta/-tu-reclamación&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Phishing&#34;,&#34;id&#34;:&#34;phishing&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/seguridad-de-la-informacion/phishing&#34;},{&#34;name&#34;:&#34;Qué hace Correos por tu seguridad&#34;,&#34;id&#34;:&#34;qué-hace-correos-por-tu-seguridad&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/seguridad-de-la-informacion/que-hace-correos-por-tu-seguridad&#34;},{&#34;name&#34;:&#34;Decálogo de seguridad&#34;,&#34;id&#34;:&#34;decálogo-de-seguridad&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/seguridad-de-la-informacion/decalogo-de-seguridad&#34;},{&#34;name&#34;:&#34;Verificador de email&#34;,&#34;id&#34;:&#34;verificador-de-email&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/seguridad-de-la-informacion/verificador-de-email&#34;}],&#34;name&#34;:&#34;Seguridad de la información&#34;,&#34;id&#34;:&#34;seguridad-de-la-información&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/seguridad-de-la-informacion&#34;},{&#34;children&#34;:[],&#34;name&#34;:&#34;Especial Ucrania/Rusia&#34;,&#34;id&#34;:&#34;especial-ucrania/rusia&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/especial-ucrania-rusia&#34;}],&#34;targetLink&#34;:&#34;_self&#34;,&#34;icon&#34;:&#34;icon-help&#34;,&#34;name&#34;:&#34;Ayuda&#34;,&#34;id&#34;:&#34;ayuda&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente&#34;,&#34;titleLink&#34;:&#34;Ayuda&#34;}],&#34;name&#34;:&#34;&#34;,&#34;id&#34;:&#34;adicionalesParticular&#34;},{&#34;children&#34;:[{&#34;targetLink&#34;:&#34;_self&#34;,&#34;icon&#34;:&#34;icon-home&#34;,&#34;name&#34;:&#34;Inicio&#34;,&#34;id&#34;:&#34;inicio&#34;,&#34;href&#34;:&#34;/es/es/empresas&#34;,&#34;titleLink&#34;:&#34;Inicio&#34;},{&#34;children&#34;:[{&#34;children&#34;:[{&#34;name&#34;:&#34;Paquete Premium&#34;,&#34;id&#34;:&#34;paquete-premium&#34;,&#34;href&#34;:&#34;/es/es/empresas/enviar/envios-nacionales/paquete-premium&#34;},{&#34;name&#34;:&#34;Paquete Estándar&#34;,&#34;id&#34;:&#34;paquete-estándar&#34;,&#34;href&#34;:&#34;/es/es/empresas/enviar/envios-nacionales/paquete-estandar&#34;},{&#34;name&#34;:&#34;Correos Frío&#34;,&#34;id&#34;:&#34;correos-frío&#34;,&#34;href&#34;:&#34;/es/es/empresas/enviar/envios-nacionales/correos-frio&#34;},{&#34;name&#34;:&#34;Paq Today&#34;,&#34;id&#34;:&#34;paq-today&#34;,&#34;href&#34;:&#34;/es/es/empresas/enviar/envios-nacionales/paq-today&#34;},{&#34;name&#34;:&#34;Paq Ligero&#34;,&#34;id&#34;:&#34;paq-ligero&#34;,&#34;href&#34;:&#34;/es/es/empresas/enviar/envios-nacionales/paq-ligero&#34;}],&#34;name&#34;:&#34;Envíos nacionales&#34;,&#34;id&#34;:&#34;envíos-nacionales&#34;,&#34;href&#34;:&#34;/es/es/empresas/enviar/envios-nacionales&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Paquete Internacional Premium&#34;,&#34;id&#34;:&#34;paquete-internacional-premium&#34;,&#34;href&#34;:&#34;/es/es/empresas/enviar/envios-internacionales/paquete-internacional-premium&#34;},{&#34;name&#34;:&#34;Paquete Internacional Standard&#34;,&#34;id&#34;:&#34;paquete-internacional-standard&#34;,&#34;href&#34;:&#34;/es/es/empresas/enviar/envios-internacionales/paquete-internacional-standard&#34;},{&#34;name&#34;:&#34;Paquete Internacional Económico&#34;,&#34;id&#34;:&#34;paquete-internacional-económico&#34;,&#34;href&#34;:&#34;/es/es/empresas/enviar/envios-internacionales/paquete-internacional-economico&#34;},{&#34;name&#34;:&#34;Paquete Internacional Light&#34;,&#34;id&#34;:&#34;paquete-internacional-light&#34;,&#34;href&#34;:&#34;/es/es/empresas/enviar/envios-internacionales/paquete-internacional-light&#34;},{&#34;name&#34;:&#34;Zonas internacionales&#34;,&#34;id&#34;:&#34;zonas-internacionales&#34;,&#34;href&#34;:&#34;/es/es/empresas/enviar/envios-internacionales/zonas-internacionales&#34;},{&#34;name&#34;:&#34;Gestión aduanera de exportación&#34;,&#34;id&#34;:&#34;gestión-aduanera-de-exportación&#34;,&#34;href&#34;:&#34;/es/es/empresas/enviar/envios-internacionales/gestion-aduanera-de-exportacion&#34;}],&#34;name&#34;:&#34;Envíos Internacionales&#34;,&#34;id&#34;:&#34;envíos-internacionales&#34;,&#34;href&#34;:&#34;/es/es/empresas/enviar/envios-internacionales&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Burofax&#34;,&#34;id&#34;:&#34;burofax&#34;,&#34;href&#34;:&#34;/es/es/empresas/enviar/comunicaciones-postales-para-empresas/burofax&#34;},{&#34;name&#34;:&#34;Carta&#34;,&#34;id&#34;:&#34;carta&#34;,&#34;href&#34;:&#34;/es/es/empresas/enviar/comunicaciones-postales-para-empresas/cartas&#34;},{&#34;name&#34;:&#34;Buzón de vacaciones&#34;,&#34;id&#34;:&#34;buzón-de-vacaciones&#34;,&#34;href&#34;:&#34;/es/es/empresas/enviar/comunicaciones-postales-para-empresas/buzon-de-vacaciones&#34;},{&#34;name&#34;:&#34;Apartado postal&#34;,&#34;id&#34;:&#34;apartado-postal&#34;,&#34;href&#34;:&#34;/es/es/empresas/enviar/comunicaciones-postales-para-empresas/apartado-postal&#34;},{&#34;name&#34;:&#34;Reenvío postal&#34;,&#34;id&#34;:&#34;reenvío-postal&#34;,&#34;href&#34;:&#34;/es/es/empresas/enviar/comunicaciones-postales-para-empresas/reenvio-postal&#34;}],&#34;name&#34;:&#34;Comunicaciones postales para empresas&#34;,&#34;id&#34;:&#34;comunicaciones-postales-para-empresas&#34;,&#34;href&#34;:&#34;/es/es/empresas/enviar/comunicaciones-postales-para-empresas&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Sobre y embalajes&#34;,&#34;id&#34;:&#34;sobre-y-embalajes&#34;,&#34;href&#34;:&#34;/es/es/empresas/enviar/sobres-y-embalajes/sobre-y-embalajes&#34;},{&#34;name&#34;:&#34;Línea Bosques&#34;,&#34;id&#34;:&#34;línea-bosques&#34;,&#34;href&#34;:&#34;/es/es/empresas/enviar/sobres-y-embalajes/linea-bosques&#34;},{&#34;name&#34;:&#34;Prefranqueados&#34;,&#34;id&#34;:&#34;prefranqueados&#34;,&#34;href&#34;:&#34;/es/es/empresas/enviar/sobres-y-embalajes/prefranqueados&#34;}],&#34;name&#34;:&#34;Sobres y embalajes&#34;,&#34;id&#34;:&#34;sobres-y-embalajes&#34;,&#34;href&#34;:&#34;/es/es/empresas/enviar/sobres-y-embalajes&#34;},{&#34;children&#34;:[],&#34;name&#34;:&#34;Sellos&#34;,&#34;id&#34;:&#34;sellos&#34;,&#34;href&#34;:&#34;/es/es/empresas/enviar/sellos&#34;}],&#34;targetLink&#34;:&#34;_self&#34;,&#34;icon&#34;:&#34;icon-send&#34;,&#34;name&#34;:&#34;Enviar&#34;,&#34;id&#34;:&#34;enviar&#34;,&#34;href&#34;:&#34;/es/es/empresas/enviar&#34;,&#34;titleLink&#34;:&#34;Enviar&#34;},{&#34;children&#34;:[{&#34;children&#34;:[{&#34;name&#34;:&#34;Crear Tienda Online&#34;,&#34;id&#34;:&#34;crear-tienda-online&#34;,&#34;href&#34;:&#34;/es/es/empresas/ecommerce/encuentra-lugares-para-vender-online/crear-tienda-online&#34;},{&#34;name&#34;:&#34;Vender en Marketplaces&#34;,&#34;id&#34;:&#34;vender-en-marketplaces&#34;,&#34;href&#34;:&#34;/es/es/empresas/ecommerce/encuentra-lugares-para-vender-online/vender-en-marketplaces&#34;},{&#34;name&#34;:&#34;Kit Digital &#34;,&#34;id&#34;:&#34;kit-digital-&#34;,&#34;href&#34;:&#34;/es/es/empresas/ecommerce/encuentra-lugares-para-vender-online/kit-digital&#34;}],&#34;name&#34;:&#34;Encuentra lugares para vender online&#34;,&#34;id&#34;:&#34;encuentra-lugares-para-vender-online&#34;,&#34;href&#34;:&#34;/es/es/empresas/ecommerce/encuentra-lugares-para-vender-online&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;PrestaShop&#34;,&#34;id&#34;:&#34;prestashop&#34;,&#34;href&#34;:&#34;/es/es/empresas/ecommerce/agiliza-la-gestion-de-tus-pedidos/prestashop&#34;},{&#34;name&#34;:&#34;Magento&#34;,&#34;id&#34;:&#34;magento&#34;,&#34;href&#34;:&#34;/es/es/empresas/ecommerce/agiliza-la-gestion-de-tus-pedidos/magento&#34;},{&#34;name&#34;:&#34;WooCommerce&#34;,&#34;id&#34;:&#34;woocommerce&#34;,&#34;href&#34;:&#34;/es/es/empresas/ecommerce/agiliza-la-gestion-de-tus-pedidos/woocommerce&#34;},{&#34;name&#34;:&#34;Software de gestión GECO&#34;,&#34;id&#34;:&#34;software-de-gestión-geco&#34;,&#34;href&#34;:&#34;/es/es/empresas/ecommerce/agiliza-la-gestion-de-tus-pedidos/software-de-gestion-geco&#34;},{&#34;name&#34;:&#34;Shopify&#34;,&#34;id&#34;:&#34;shopify&#34;,&#34;href&#34;:&#34;/es/es/empresas/ecommerce/agiliza-la-gestion-de-tus-pedidos/shopify&#34;}],&#34;name&#34;:&#34;Agiliza la gestión de tus pedidos&#34;,&#34;id&#34;:&#34;agiliza-la-gestión-de-tus-pedidos&#34;,&#34;href&#34;:&#34;/es/es/empresas/ecommerce/agiliza-la-gestion-de-tus-pedidos&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Citypaq empresas&#34;,&#34;id&#34;:&#34;citypaq-empresas&#34;,&#34;href&#34;:&#34;/es/es/empresas/ecommerce/refuerza-la-logistica-de-tu-ecommerce/citypaq-empresas&#34;},{&#34;name&#34;:&#34;Integración API&#34;,&#34;id&#34;:&#34;integración-api&#34;,&#34;href&#34;:&#34;/es/es/empresas/ecommerce/refuerza-la-logistica-de-tu-ecommerce/integracion-api&#34;},{&#34;name&#34;:&#34;Integración ficheros&#34;,&#34;id&#34;:&#34;integración-ficheros&#34;,&#34;href&#34;:&#34;/es/es/empresas/ecommerce/refuerza-la-logistica-de-tu-ecommerce/integracion-ficheros&#34;},{&#34;name&#34;:&#34;Bases de datos de Puntos de Entrega&#34;,&#34;id&#34;:&#34;bases-de-datos-de-puntos-de-entrega&#34;,&#34;href&#34;:&#34;/es/es/empresas/ecommerce/refuerza-la-logistica-de-tu-ecommerce/bases-de-datos-de-puntos-de-entrega&#34;}],&#34;name&#34;:&#34;Refuerza la logística de tu ecommerce&#34;,&#34;id&#34;:&#34;refuerza-la-logística-de-tu-ecommerce&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Logística Inversa&#34;,&#34;id&#34;:&#34;logística-inversa&#34;,&#34;href&#34;:&#34;/es/es/empresas/ecommerce/facilita-las-devoluciones-a-tus-clientes/logistica-inversa&#34;},{&#34;name&#34;:&#34;Paq Retorno Premium&#34;,&#34;id&#34;:&#34;paq-retorno-premium&#34;,&#34;href&#34;:&#34;/es/es/empresas/ecommerce/facilita-las-devoluciones-a-tus-clientes/paq-retorno-premium&#34;},{&#34;name&#34;:&#34;Franqueo en destino&#34;,&#34;id&#34;:&#34;franqueo-en-destino&#34;,&#34;href&#34;:&#34;/es/es/empresas/ecommerce/facilita-las-devoluciones-a-tus-clientes/franqueo-en-destino&#34;},{&#34;name&#34;:&#34;Paq Return internacional&#34;,&#34;id&#34;:&#34;paq-return-internacional&#34;,&#34;href&#34;:&#34;/es/es/empresas/ecommerce/facilita-las-devoluciones-a-tus-clientes/paq-return-internacional&#34;},{&#34;name&#34;:&#34;Portal de Devoluciones&#34;,&#34;id&#34;:&#34;portal-de-devoluciones&#34;,&#34;href&#34;:&#34;/es/es/empresas/ecommerce/facilita-las-devoluciones-a-tus-clientes/portal-de-devoluciones&#34;}],&#34;name&#34;:&#34;Facilita las devoluciones a tus clientes&#34;,&#34;id&#34;:&#34;facilita-las-devoluciones-a-tus-clientes&#34;,&#34;href&#34;:&#34;/es/es/empresas/ecommerce/facilita-las-devoluciones-a-tus-clientes&#34;}],&#34;targetLink&#34;:&#34;_self&#34;,&#34;icon&#34;:&#34;icon-ecommerce&#34;,&#34;name&#34;:&#34;Ecommerce&#34;,&#34;id&#34;:&#34;ecommerce&#34;,&#34;href&#34;:&#34;/es/es/empresas/ecommerce&#34;,&#34;titleLink&#34;:&#34;Ecommerce&#34;},{&#34;children&#34;:[{&#34;children&#34;:[],&#34;name&#34;:&#34;Importa con Correos&#34;,&#34;id&#34;:&#34;importa-con-correos&#34;,&#34;href&#34;:&#34;/es/es/empresas/internacional/importa-con-correos&#34;},{&#34;children&#34;:[],&#34;name&#34;:&#34;Exporta con Correos&#34;,&#34;id&#34;:&#34;exporta-con-correos&#34;,&#34;href&#34;:&#34;/es/es/empresas/internacional/exporta-con-correos&#34;}],&#34;targetLink&#34;:&#34;_self&#34;,&#34;icon&#34;:&#34;icon-box-send&#34;,&#34;name&#34;:&#34;Internacional&#34;,&#34;id&#34;:&#34;internacional&#34;,&#34;href&#34;:&#34;/es/es/empresas/internacional&#34;,&#34;titleLink&#34;:&#34;Internacional&#34;},{&#34;children&#34;:[{&#34;children&#34;:[{&#34;name&#34;:&#34;Mailing&#34;,&#34;id&#34;:&#34;mailing&#34;,&#34;href&#34;:&#34;/es/es/empresas/marketing/comunicate-con-tus-clientes-de-manera-efectiva/mailing&#34;},{&#34;name&#34;:&#34;Publicidad sin personalizar&#34;,&#34;id&#34;:&#34;publicidad-sin-personalizar&#34;,&#34;href&#34;:&#34;/es/es/empresas/marketing/comunicate-con-tus-clientes-de-manera-efectiva/publicidad-sin-personalizar&#34;}],&#34;name&#34;:&#34;Comunícate con tus clientes de manera efectiva&#34;,&#34;id&#34;:&#34;comunícate-con-tus-clientes-de-manera-efectiva&#34;,&#34;href&#34;:&#34;/es/es/empresas/marketing/comunicate-con-tus-clientes-de-manera-efectiva&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Base de Datos de Códigos Postales&#34;,&#34;id&#34;:&#34;base-de-datos-de-códigos-postales&#34;,&#34;href&#34;:&#34;/es/es/empresas/marketing/identifica-a-tus-clientes-potenciales/base-de-datos-de-codigos-postales&#34;}],&#34;name&#34;:&#34;Identifica a tus clientes potenciales&#34;,&#34;id&#34;:&#34;identifica-a-tus-clientes-potenciales&#34;,&#34;href&#34;:&#34;/es/es/empresas/marketing/identifica-a-tus-clientes-potenciales&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Correos Sampling &#34;,&#34;id&#34;:&#34;correos-sampling-&#34;,&#34;href&#34;:&#34;/es/es/empresas/marketing/llega-hasta-tus-clientes-y-fidelizalos/correos-sampling&#34;},{&#34;name&#34;:&#34;Correos Add&#34;,&#34;id&#34;:&#34;correos-add&#34;,&#34;href&#34;:&#34;/es/es/empresas/marketing/llega-hasta-tus-clientes-y-fidelizalos/correos-add&#34;}],&#34;name&#34;:&#34;Llega hasta tus clientes y fidelízalos&#34;,&#34;id&#34;:&#34;llega-hasta-tus-clientes-y-fidelízalos&#34;,&#34;href&#34;:&#34;/es/es/empresas/marketing/llega-hasta-tus-clientes-y-fidelizalos&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Generación y captura dinámica de leads&#34;,&#34;id&#34;:&#34;generación-y-captura-dinámica-de-leads&#34;,&#34;href&#34;:&#34;/es/es/empresas/marketing/optimiza-tus-campanas-de-marketing/generacion-y-captura-dinamica-de-leads&#34;},{&#34;name&#34;:&#34;Información de Devoluciones&#34;,&#34;id&#34;:&#34;información-de-devoluciones&#34;,&#34;href&#34;:&#34;/es/es/empresas/marketing/optimiza-tus-campanas-de-marketing/informacion-de-devoluciones&#34;},{&#34;name&#34;:&#34;Impresión y manipulado&#34;,&#34;id&#34;:&#34;impresión-y-manipulado&#34;,&#34;href&#34;:&#34;/es/es/empresas/marketing/optimiza-tus-campanas-de-marketing/impresion-y-manipulado&#34;},{&#34;name&#34;:&#34;Seguimiento de campañas&#34;,&#34;id&#34;:&#34;seguimiento-de-campañas&#34;,&#34;href&#34;:&#34;/es/es/empresas/marketing/optimiza-tus-campanas-de-marketing/seguimiento-de-campanas&#34;}],&#34;name&#34;:&#34;Optimiza tus campañas de marketing&#34;,&#34;id&#34;:&#34;optimiza-tus-campañas-de-marketing&#34;,&#34;href&#34;:&#34;/es/es/empresas/marketing/optimiza-tus-campanas-de-marketing&#34;}],&#34;targetLink&#34;:&#34;_self&#34;,&#34;icon&#34;:&#34;icon-marketing&#34;,&#34;name&#34;:&#34;Marketing&#34;,&#34;id&#34;:&#34;marketing&#34;,&#34;href&#34;:&#34;/es/es/empresas/marketing&#34;,&#34;titleLink&#34;:&#34;Marketing&#34;},{&#34;children&#34;:[{&#34;children&#34;:[{&#34;name&#34;:&#34;Gestión de albaranes GANES&#34;,&#34;id&#34;:&#34;gestión-de-albaranes-ganes&#34;,&#34;href&#34;:&#34;/es/es/empresas/comunicaciones-fisicas-y-digitales/sistemas-de-gestion-de-albaranes/gestion-de-albaranes-ganes&#34;},{&#34;name&#34;:&#34;Albaranes y Depósitos Online ADO&#34;,&#34;id&#34;:&#34;albaranes-y-depósitos-online-ado&#34;,&#34;href&#34;:&#34;/es/es/empresas/comunicaciones-fisicas-y-digitales/sistemas-de-gestion-de-albaranes/albaranes-y-depositos-online-ado&#34;}],&#34;name&#34;:&#34;Sistemas de gestión de albaranes&#34;,&#34;id&#34;:&#34;sistemas-de-gestión-de-albaranes&#34;},{&#34;children&#34;:[],&#34;name&#34;:&#34;Plataforma multicanal Nexo&#34;,&#34;id&#34;:&#34;plataforma-multicanal-nexo&#34;,&#34;href&#34;:&#34;/es/es/empresas/comunicaciones-fisicas-y-digitales/plataforma-multicanal-nexo&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Notificaciones Administrativas&#34;,&#34;id&#34;:&#34;notificaciones-administrativas&#34;,&#34;href&#34;:&#34;/es/es/empresas/comunicaciones-fisicas-y-digitales/aliados-del-sector-publico/notificaciones-administrativas&#34;}],&#34;name&#34;:&#34;Aliados del Sector Público&#34;,&#34;id&#34;:&#34;aliados-del-sector-público&#34;}],&#34;targetLink&#34;:&#34;_self&#34;,&#34;icon&#34;:&#34;icon-communications&#34;,&#34;name&#34;:&#34;Comunicaciones físicas y digitales&#34;,&#34;id&#34;:&#34;comunicaciones-físicas-y-digitales&#34;,&#34;href&#34;:&#34;/es/es/empresas/comunicaciones-fisicas-y-digitales&#34;,&#34;titleLink&#34;:&#34;Comunicaciones físicas y digitales&#34;},{&#34;children&#34;:[{&#34;children&#34;:[{&#34;name&#34;:&#34;Agentes comerciales&#34;,&#34;id&#34;:&#34;agentes-comerciales&#34;,&#34;href&#34;:&#34;/es/es/empresas/para-tu-negocio/soluciones-especificas/agentes-comerciales&#34;},{&#34;name&#34;:&#34;Agentes turísticos&#34;,&#34;id&#34;:&#34;agentes-turísticos&#34;,&#34;href&#34;:&#34;/es/es/empresas/para-tu-negocio/soluciones-especificas/agentes-turisticos&#34;},{&#34;name&#34;:&#34;Desarrolla tu idea de negocio &#34;,&#34;id&#34;:&#34;desarrolla-tu-idea-de-negocio-&#34;,&#34;href&#34;:&#34;/es/es/empresas/para-tu-negocio/soluciones-especificas/desarrolla-tu-idea-de-negocio&#34;},{&#34;name&#34;:&#34;Publicaciones Periódicas&#34;,&#34;id&#34;:&#34;publicaciones-periódicas&#34;,&#34;href&#34;:&#34;/es/es/empresas/para-tu-negocio/soluciones-especificas/publicaciones-periodicas&#34;},{&#34;name&#34;:&#34;Libros&#34;,&#34;id&#34;:&#34;libros&#34;,&#34;href&#34;:&#34;/es/es/empresas/para-tu-negocio/soluciones-especificas/libros&#34;},{&#34;name&#34;:&#34;Correos Market&#34;,&#34;id&#34;:&#34;correos-market&#34;,&#34;href&#34;:&#34;/es/es/empresas/para-tu-negocio/soluciones-especificas/correos-market&#34;},{&#34;name&#34;:&#34;Correos Logística&#34;,&#34;id&#34;:&#34;correos-logística&#34;,&#34;href&#34;:&#34;/es/es/empresas/para-tu-negocio/soluciones-especificas/correos-logistica&#34;},{&#34;name&#34;:&#34;Promoción en pantallas&#34;,&#34;id&#34;:&#34;promoción-en-pantallas&#34;,&#34;href&#34;:&#34;/es/es/empresas/para-tu-negocio/soluciones-especificas/promocion-en-pantallas&#34;}],&#34;name&#34;:&#34;Soluciones específicas &#34;,&#34;id&#34;:&#34;soluciones-específicas-&#34;,&#34;href&#34;:&#34;/es/es/empresas/para-tu-negocio/soluciones-especificas&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Notificaciones Electrónicas&#34;,&#34;id&#34;:&#34;notificaciones-electrónicas&#34;,&#34;href&#34;:&#34;/es/es/empresas/para-tu-negocio/hacia-la-transformacion-digital/notificaciones-electronicas&#34;},{&#34;name&#34;:&#34;Buzón Digital&#34;,&#34;id&#34;:&#34;buzón-digital&#34;,&#34;href&#34;:&#34;/es/es/empresas/para-tu-negocio/hacia-la-transformacion-digital/buzon-digital&#34;}],&#34;name&#34;:&#34;Hacia la transformación digital&#34;,&#34;id&#34;:&#34;hacia-la-transformación-digital&#34;,&#34;href&#34;:&#34;/es/es/empresas/para-tu-negocio/hacia-la-transformacion-digital&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Cobro de recibos&#34;,&#34;id&#34;:&#34;cobro-de-recibos&#34;,&#34;href&#34;:&#34;/es/es/empresas/para-tu-negocio/lleva-el-control-financiero-de-tu-negocio/cobro-de-recibos&#34;},{&#34;name&#34;:&#34;Correos Pay&#34;,&#34;id&#34;:&#34;correos-pay&#34;,&#34;href&#34;:&#34;/es/es/empresas/para-tu-negocio/lleva-el-control-financiero-de-tu-negocio/correos-pay&#34;},{&#34;name&#34;:&#34;Correos Cash&#34;,&#34;id&#34;:&#34;correos-cash&#34;,&#34;href&#34;:&#34;/es/es/empresas/para-tu-negocio/lleva-el-control-financiero-de-tu-negocio/correos-cash&#34;},{&#34;name&#34;:&#34;Tarjeta Correos Prepago Empresas&#34;,&#34;id&#34;:&#34;tarjeta-correos-prepago-empresas&#34;,&#34;href&#34;:&#34;/es/es/empresas/para-tu-negocio/lleva-el-control-financiero-de-tu-negocio/tarjeta-correos-prepago-empresas&#34;}],&#34;name&#34;:&#34;Lleva el control financiero de tu negocio&#34;,&#34;id&#34;:&#34;lleva-el-control-financiero-de-tu-negocio&#34;,&#34;href&#34;:&#34;/es/es/empresas/para-tu-negocio/lleva-el-control-financiero-de-tu-negocio&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Tarjeta Más Cerca&#34;,&#34;id&#34;:&#34;tarjeta-más-cerca&#34;,&#34;href&#34;:&#34;/es/es/empresas/para-tu-negocio/como-ser-cliente-de-correos/tarjeta-mas-cerca&#34;}],&#34;name&#34;:&#34;Cómo ser cliente de Correos&#34;,&#34;id&#34;:&#34;cómo-ser-cliente-de-correos&#34;,&#34;href&#34;:&#34;/es/es/empresas/para-tu-negocio/como-ser-cliente-de-correos&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Distintivo Ambiental DGT&#34;,&#34;id&#34;:&#34;distintivo-ambiental-dgt&#34;,&#34;href&#34;:&#34;/es/es/empresas/para-tu-negocio/servicios-de-la-dgt/distintivo-ambiental-dgt&#34;},{&#34;name&#34;:&#34;Duplicado del Permiso de Circulación&#34;,&#34;id&#34;:&#34;duplicado-del-permiso-de-circulación&#34;,&#34;href&#34;:&#34;/es/es/empresas/para-tu-negocio/servicios-de-la-dgt/duplicado-del-permiso-de-circulacion&#34;},{&#34;name&#34;:&#34;Cambio de Titularidad&#34;,&#34;id&#34;:&#34;cambio-de-titularidad&#34;,&#34;href&#34;:&#34;/es/es/empresas/para-tu-negocio/servicios-de-la-dgt/cambio-de-titularidad&#34;},{&#34;name&#34;:&#34;Notificación de venta de un vehículo&#34;,&#34;id&#34;:&#34;notificación-de-venta-de-un-vehículo&#34;,&#34;href&#34;:&#34;/es/es/empresas/para-tu-negocio/servicios-de-la-dgt/notificacion-de-venta-de-un-vehiculo&#34;}],&#34;name&#34;:&#34;Servicios de la DGT&#34;,&#34;id&#34;:&#34;servicios-de-la-dgt&#34;,&#34;href&#34;:&#34;/es/es/empresas/para-tu-negocio/servicios-de-la-dgt&#34;}],&#34;targetLink&#34;:&#34;_self&#34;,&#34;icon&#34;:&#34;icon-business&#34;,&#34;name&#34;:&#34;Para tu negocio&#34;,&#34;id&#34;:&#34;para-tu-negocio&#34;,&#34;href&#34;:&#34;/es/es/empresas/para-tu-negocio&#34;,&#34;titleLink&#34;:&#34;Para tu negocio&#34;}],&#34;name&#34;:&#34;Empresa&#34;,&#34;id&#34;:&#34;empresa&#34;},{&#34;children&#34;:[{&#34;targetLink&#34;:&#34;_self&#34;,&#34;icon&#34;:&#34;icon-settings&#34;,&#34;name&#34;:&#34;Herramientas&#34;,&#34;id&#34;:&#34;herramientas&#34;,&#34;href&#34;:&#34;/es/es/empresas/herramientas&#34;,&#34;titleLink&#34;:&#34;Herramientas&#34;},{&#34;targetLink&#34;:&#34;_self&#34;,&#34;icon&#34;:&#34;icon-news&#34;,&#34;name&#34;:&#34;Actualidad&#34;,&#34;id&#34;:&#34;actualidad&#34;,&#34;href&#34;:&#34;/es/es/actualidad&#34;,&#34;titleLink&#34;:&#34;Actualidad&#34;},{&#34;relatedModal&#34;:&#34;&#34;,&#34;targetLink&#34;:&#34;_blank&#34;,&#34;icon&#34;:&#34;icon-cart&#34;,&#34;name&#34;:&#34;Tienda&#34;,&#34;id&#34;:&#34;tienda&#34;,&#34;href&#34;:&#34;https://market.correos.es/category/correos&#34;,&#34;titleLink&#34;:&#34;Tienda&#34;},{&#34;children&#34;:[{&#34;children&#34;:[{&#34;name&#34;:&#34;Cómo preparar el envío&#34;,&#34;id&#34;:&#34;cómo-preparar-el-envío&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/enviar/como-preparar-envio&#34;},{&#34;name&#34;:&#34;Cómo funciona Mi Oficina&#34;,&#34;id&#34;:&#34;cómo-funciona-mi-oficina&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/enviar/como-funciona-mi-oficina&#34;},{&#34;name&#34;:&#34;Dimensiones y pesos&#34;,&#34;id&#34;:&#34;dimensiones-y-pesos&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/enviar/dimensiones-y-pesos&#34;},{&#34;name&#34;:&#34;Tratamiento de tus datos&#34;,&#34;id&#34;:&#34;tratamiento-de-tus-datos&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/enviar/tratamiento-de-tus-datos&#34;},{&#34;name&#34;:&#34;Sellos y franqueo&#34;,&#34;id&#34;:&#34;sellos-y-franqueo&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/enviar/sellos-y-franqueo&#34;}],&#34;name&#34;:&#34;Enviar&#34;,&#34;id&#34;:&#34;enviar&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Recoger envío&#34;,&#34;id&#34;:&#34;recoger-envío&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/recibir/recoger-envio&#34;},{&#34;name&#34;:&#34;Código de envío&#34;,&#34;id&#34;:&#34;código-de-envío&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/recibir/codigo-de-envio&#34;},{&#34;name&#34;:&#34;Aviso de llegada&#34;,&#34;id&#34;:&#34;aviso-de-llegada&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/recibir/aviso-de-llegada&#34;},{&#34;name&#34;:&#34;Envíos estacionados&#34;,&#34;id&#34;:&#34;envíos-estacionados&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/recibir/envios-estacionados&#34;},{&#34;name&#34;:&#34;Incidencias&#34;,&#34;id&#34;:&#34;incidencias&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/recibir/incidencias&#34;}],&#34;name&#34;:&#34;Recibir&#34;,&#34;id&#34;:&#34;recibir&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Correos ID&#34;,&#34;id&#34;:&#34;correos-id&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/otras-consultas/correos-id&#34;}],&#34;name&#34;:&#34;Otras consultas&#34;,&#34;id&#34;:&#34;otras-consultas&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/otras-consultas&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;DUA Importación&#34;,&#34;id&#34;:&#34;dua-importación&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/informacion-aduanera/dua-importacion&#34;},{&#34;name&#34;:&#34;DUA Exportación&#34;,&#34;id&#34;:&#34;dua-exportación&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/informacion-aduanera/dua-exportacion&#34;},{&#34;name&#34;:&#34;Brexit, importación y exportación con el Reino Unido&#34;,&#34;id&#34;:&#34;brexit,-importación-y-exportación-con-el-reino-unido&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/informacion-aduanera/brexit&#34;},{&#34;name&#34;:&#34;Nuevo Proceso de Seguridad de Importación&#34;,&#34;id&#34;:&#34;nuevo-proceso-de-seguridad-de-importación&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/informacion-aduanera/nuevo-proceso-seguridad-importacion&#34;},{&#34;name&#34;:&#34;IVA de importación en el Comercio Electrónico &#34;,&#34;id&#34;:&#34;iva-de-importación-en-el-comercio-electrónico-&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/informacion-aduanera/iva-de-importacion-en-el-comercio-electronico&#34;}],&#34;name&#34;:&#34;Información aduanera&#34;,&#34;id&#34;:&#34;información-aduanera&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/informacion-aduanera&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Nacionales&#34;,&#34;id&#34;:&#34;nacionales&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/coberturas-y-garantias/nacionales&#34;},{&#34;name&#34;:&#34;Internacionales&#34;,&#34;id&#34;:&#34;internacionales&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/coberturas-y-garantias/internacionales&#34;}],&#34;name&#34;:&#34;Coberturas y garantías&#34;,&#34;id&#34;:&#34;coberturas-y-garantías&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/coberturas-y-garantias&#34;},{&#34;children&#34;:[],&#34;name&#34;:&#34;Tarifas&#34;,&#34;id&#34;:&#34;tarifas&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/tarifas&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Tratamiento de las incidencias/reclamaciones/consultas&#34;,&#34;id&#34;:&#34;tratamiento-de-las-incidencias/reclamaciones/consultas&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/tratamiento-de-las-incidencias-reclamaciones-consultas&#34;},{&#34;name&#34;:&#34;Da de alta tu incidencia/ reclamación&#34;,&#34;id&#34;:&#34;da-de-alta-tu-incidencia/-reclamación&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/da-de-alta-tu-incidencia-reclamacion&#34;},{&#34;name&#34;:&#34;Modifica o amplia información&#34;,&#34;id&#34;:&#34;modifica-o-amplia-información&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/modifica-o-amplia-informacion&#34;},{&#34;name&#34;:&#34;Conoce el estado de tu incidencia&#34;,&#34;id&#34;:&#34;conoce-el-estado-de-tu-incidencia&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/conoce-el-estado-de-tu-incidencia&#34;},{&#34;name&#34;:&#34;Solicita información&#34;,&#34;id&#34;:&#34;solicita-información&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/solicita-informacion&#34;}],&#34;name&#34;:&#34;Tu consulta/ tu reclamación&#34;,&#34;id&#34;:&#34;tu-consulta/-tu-reclamación&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;Phishing&#34;,&#34;id&#34;:&#34;phishing&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/seguridad-de-la-informacion/phishing&#34;},{&#34;name&#34;:&#34;Qué hace Correos por tu seguridad&#34;,&#34;id&#34;:&#34;qué-hace-correos-por-tu-seguridad&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/seguridad-de-la-informacion/que-hace-correos-por-tu-seguridad&#34;},{&#34;name&#34;:&#34;Decálogo de seguridad&#34;,&#34;id&#34;:&#34;decálogo-de-seguridad&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/seguridad-de-la-informacion/decalogo-de-seguridad&#34;},{&#34;name&#34;:&#34;Verificador de email&#34;,&#34;id&#34;:&#34;verificador-de-email&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/seguridad-de-la-informacion/verificador-de-email&#34;}],&#34;name&#34;:&#34;Seguridad de la información&#34;,&#34;id&#34;:&#34;seguridad-de-la-información&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/seguridad-de-la-informacion&#34;},{&#34;children&#34;:[],&#34;name&#34;:&#34;Especial Ucrania/Rusia&#34;,&#34;id&#34;:&#34;especial-ucrania/rusia&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente/especial-ucrania-rusia&#34;}],&#34;targetLink&#34;:&#34;_self&#34;,&#34;icon&#34;:&#34;icon-help&#34;,&#34;name&#34;:&#34;Ayuda&#34;,&#34;id&#34;:&#34;ayuda&#34;,&#34;href&#34;:&#34;/es/es/atencion-al-cliente&#34;,&#34;titleLink&#34;:&#34;Ayuda&#34;}],&#34;name&#34;:&#34;&#34;,&#34;id&#34;:&#34;adicionalesEmpresa&#34;},{&#34;children&#34;:[{&#34;name&#34;:&#34;ES&#34;,&#34;id&#34;:&#34;es&#34;,&#34;href&#34;:&#34;/es/es/particulares&#34;},{&#34;name&#34;:&#34;CA&#34;,&#34;id&#34;:&#34;ca&#34;,&#34;href&#34;:&#34;/es/ca/particulars&#34;},{&#34;name&#34;:&#34;EU&#34;,&#34;id&#34;:&#34;eu&#34;,&#34;href&#34;:&#34;/es/eu/partikularrak&#34;},{&#34;name&#34;:&#34;GA&#34;,&#34;id&#34;:&#34;gl&#34;,&#34;href&#34;:&#34;/es/gl/particulares&#34;},{&#34;name&#34;:&#34;VA&#34;,&#34;id&#34;:&#34;va&#34;,&#34;href&#34;:&#34;/es/va/particulars&#34;},{&#34;name&#34;:&#34;EN&#34;,&#34;id&#34;:&#34;en&#34;,&#34;href&#34;:&#34;/es/en/individuals&#34;}],&#34;name&#34;:&#34;Idioma:&#34;,&#34;id&#34;:&#34;idiomas&#34;},{&#34;children&#34;:[{&#34;icon&#34;:&#34;icon-search&#34;,&#34;name&#34;:&#34;Buscar&#34;,&#34;id&#34;:&#34;busqueda&#34;,&#34;href&#34;:&#34;/es/es/buscador/detalle&#34;},{&#34;targetLink&#34;:&#34;_blank&#34;,&#34;icon&#34;:&#34;icon-profile&#34;,&#34;name&#34;:&#34;INICIAR SESIÓN&#34;,&#34;id&#34;:&#34;login&#34;,&#34;href&#34;:&#34;https://mioficina.correos.es/es/es/login&#34;}],&#34;name&#34;:&#34;&#34;,&#34;id&#34;:&#34;accesos&#34;}]' search-input-label="Busca en correos.es" menu-lv-zero='particular' locator-search-url="/es/es/herramientas/localizador/envios/detalle" zip-code-url="/es/es/herramientas/codigos-postales/detalle" search-url='/es/es/buscador/detalle' menu-title-particular="Particular" menu-title-empresa="Empresa" particular-href='/es/es/particulares' particular-target='_self' empresa-href='/es/es/empresas' empresa-target='_self' menu-opened='particular' tab-particular-active='true' tab-empresa-active='false' search-target="false" login-menu-literals='[{&#34;targetLink&#34;:&#34;_self&#34;,&#34;name&#34;:&#34;MI OFICINA&#34;,&#34;id&#34;:&#34;mi-oficina&#34;,&#34;href&#34;:&#34;https://mioficina.correos.es/es/es/home&#34;,&#34;title&#34;:&#34;Ir a Mi Oficina&#34;},{&#34;targetLink&#34;:&#34;_self&#34;,&#34;name&#34;:&#34;MI PERFIL&#34;,&#34;id&#34;:&#34;mi-perfil&#34;,&#34;href&#34;:&#34;https://mioficina.correos.es/es/es/home/mi-perfil/detalle&#34;,&#34;title&#34;:&#34;Ir a Mi Perfil&#34;},{&#34;buttonRef&#34;:&#34;https://mioficina.correos.es/es/es/login&#34;,&#34;targetLink&#34;:&#34;_self&#34;,&#34;name&#34;:&#34;CERRAR SESIÓN&#34;,&#34;id&#34;:&#34;cerrarsesion&#34;,&#34;title&#34;:&#34;Cerrar sesión&#34;}]' modal-title="Acciones" image-profile-default="/content/dam/mioficina/iconos/profile_avatar.svg" url-epostal="https://epostal.correos.es/OV2PREENVWEB/ibm_security_logout?logoutExitPage=/jsp/_rlvid.jsp.faces?_rap=gc_logout.desconexionOV2">
+	</correos-cdk-core-header>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+<div class="alert aem-GridColumn aem-GridColumn--default--12">
+	
+    
+
+        
+    
+	
+</div>
+<div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="experiencefragment aem-GridColumn aem-GridColumn--default--12">
+<div id="experiencefragment-ab0057062e" class="cmp-experiencefragment cmp-experiencefragment---8mtodoelano">
+
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="subheaderdetail aem-GridColumn aem-GridColumn--default--12">
+  
+    
+
+  
+  
+  
+  
+	
+	<correos-cdk-dual-header background-color-decorator="var(--theme-color-white-plain)" fill-color-decorator="var(--theme-color-white-plain)" bg-image="/content/dam/correos/imagenes/campañas/elena-fortun-banner-web-correos-1440x960.jpg" show-image-mobile="true" show-decoration="true" img-decoration-top="/content/dam/correos/imagenes/ilustraciones/trama/deco_triangles.svg" img-decoration-right="/content/dam/correos/imagenes/ilustraciones/trama/deco_bars.svg">
+
+		<correos-ui-brand-product-text slot="cdk-body-containt">
+			<h1 slot="title">Particulares</h1>
+			<span slot="subtitle">#8MTodoElAño</span>
+			<span slot="body-text">Consigue el sello dedicado a Elena Fortún, célebre escritora española de mediados del siglo XX.</span>
+			
+	
+    
+
+	<correos-ui-button slot="button" theme="primary" type="text" href-link="https://www.market.correos.es/product/sello-elena-fortun?utm_source=site_cor_ces&amp;utm_medium=banner&amp;utm_campaign=CMk_Jun23_8M_El_Fort&amp;utm_term=home&amp;utm_content=part" target="_blank" element-title="#8MTodoElAño" component-type="homedecorator">
+		<span slot="text">COMPRAR SELLO</span>
+		
+	</correos-ui-button>
+
+			
+	
+    
+
+	
+
+		</correos-ui-brand-product-text>
+		<div slot="extra-section" class="wrapper-main">
+			<div class="row">
+				<div class="col-12">
+					
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="sectionautomaticresponsive aem-GridColumn aem-GridColumn--default--12">
+	
+    
+
+	
+	
+	
+	
+	<correos-cdk-section-box bg-color="var(--theme-color-white-plain)" full-width="true">
+		<div slot="block">
+
+	
+		
+		
+	
+	
+	
+
+		
+		<correos-cdk-section-automatic-responsive variant="1-2-2" custom-column="false" text-show-less-section="MOSTRAR MENOS" text-aria-show-less-section="Mostrar menos" text-show-more-section="MOSTRAR MÁS" text-aria-show-more-section="Mostrar más">
+			<section slot="components">
+				
+
+
+	
+	
+		
+		
+	
+    
+
+
+	<correos-cdk-tracking-box literals='{&#34;searchFieldLabel&#34;:&#34;Nº de seguimiento de envío&#34;,&#34;buttonSubmitTxT&#34;:&#34;BUSCAR&#34;}' variant="landing" target="_self" url-form='/es/es/herramientas/localizador/envios/detalle' input-url-param='tracking-number' api-host='https://api1.correos.es' img-selected="/etc.clientlibs/correos/clientlibs/clientlib-base/resources/assets/images/checkbox-selected.svg" img-pasive="/etc.clientlibs/correos/clientlibs/clientlib-base/resources/assets/images/checkbox-pasive.svg" img-inactive="/etc.clientlibs/correos/clientlibs/clientlib-base/resources/assets/images/checkbox-inactive.svg">
+
+		<h1 slot="title">Sigue tu envío</h1>
+		
+		
+
+		
+		<section slot="tool-first">
+			<correos-ui-card href-link="/es/es/herramientas/oficinas-buzones-citypaq/detalle" target="_self" component-type="card" component-title="Sigue tu envío">
+				
+				
+					<img slot="image" src="/content/dam/correos/imagenes/iconos/home/localizador.svg" alt=""/>
+				
+				<p slot="text">Localiza oficinas, buzones y Citypaq</p>
+			</correos-ui-card>
+		</section>
+		<section slot="tool-second">
+			<correos-ui-card href-link="/es/es/herramientas/codigos-postales/detalle" target="_self" component-type="card" component-title="Sigue tu envío">
+				
+				
+					<img slot="image" src="/content/dam/correos/imagenes/iconos/home/encuentra_cp.svg" alt=""/>
+				
+				<p slot="text">Encuentra códigos postales</p>
+			</correos-ui-card>
+		</section>
+		<section slot="tool-third">
+			<correos-ui-card href-link="/es/es/atencion-al-cliente/seguridad-de-la-informacion/verificador-de-email" target="_self" component-type="card" component-title="Sigue tu envío">
+				
+				
+					<img slot="image" src="/content/dam/correos/imagenes/iconos/home/gnomo.svg" alt=""/>
+				
+				<p slot="text">Verificador de email</p>
+			</correos-ui-card>
+		</section>
+		
+	</correos-cdk-tracking-box>
+
+	
+
+
+	
+		
+		
+  
+    
+
+  
+    
+    
+	
+	<correos-cdk-section-box bg-color="var(--theme-color-white-plain)" center-content="false">
+		<div slot="block">
+
+    <correos-cdk-shipping-starter title="Servicio especial de paquetería" subtitle="Envíos económicos con recogida a domicilio" postal-code-title="¿Dónde quieres realizar el envío?" postal-code-label="Código postal" postal-code-error="Introduce un código postal válido" restricted-postal-code-error="En esta oferta no es posible enviar a Islas Canarias, Ceuta o Melilla" preset-title="¿Qué tamaño y peso tiene?" button-text="COMENZAR ENVÍO" button-theme="primary" more-info-button-text="MÁS INFO" more-info-button-href="/es/es/particulares/enviar/envios-nacionales/envios-economicos/servicio-especial-de-paqueteria" more-info-button-target="_self" redirect-url="https://mioficina.correos.es/es/es/oferta-especial-paqueteria/detalle" redirect-target="_self" default-size-logo="/etc.clientlibs/correos/clientlibs/clientlib-base/resources/assets/images/envio_pequeno.svg" with-border="true" bg-color="var(--theme-color-white-plain)" weight-limit-text="Hasta" weight-unit="kg" dimensions-text="Dimensión:" default-sizes='[{&#34;friendly_size_code&#34;:2,&#34;heigth&#34;:&#34;9&#34;,&#34;width&#34;:&#34;23&#34;,&#34;weight&#34;:&#34;2000&#34;,&#34;friendly_size_name&#34;:&#34;Tamaño S&#34;,&#34;friendly_size_logo&#34;:&#34;&#34;,&#34;long&#34;:&#34;39&#34;},{&#34;friendly_size_code&#34;:3,&#34;heigth&#34;:&#34;9&#34;,&#34;width&#34;:&#34;23&#34;,&#34;weight&#34;:&#34;2000&#34;,&#34;friendly_size_name&#34;:&#34;Tamaño M&#34;,&#34;friendly_size_logo&#34;:&#34;&#34;,&#34;long&#34;:&#34;39&#34;},{&#34;friendly_size_code&#34;:4,&#34;heigth&#34;:&#34;9&#34;,&#34;width&#34;:&#34;23&#34;,&#34;weight&#34;:&#34;2000&#34;,&#34;friendly_size_name&#34;:&#34;Tamaño L&#34;,&#34;friendly_size_logo&#34;:&#34;&#34;,&#34;long&#34;:&#34;39&#34;},{&#34;friendly_size_code&#34;:5,&#34;heigth&#34;:&#34;9&#34;,&#34;width&#34;:&#34;23&#34;,&#34;weight&#34;:&#34;2000&#34;,&#34;friendly_size_name&#34;:&#34;Tamaño XL&#34;,&#34;friendly_size_logo&#34;:&#34;&#34;,&#34;long&#34;:&#34;39&#34;}]' card-error='Indica todos los campos antes de realizar el envío' price-text='desde' price='4,02€' categories='[{&#34;default&#34;:false,&#34;name&#34;:&#34;Paquetería&#34;,&#34;id&#34;:&#34;1&#34;}]' default-pilgrim-sizes='[{&#34;friendly_size_code&#34;:2,&#34;heigth&#34;:5,&#34;width&#34;:5,&#34;weight&#34;:&#34;200&#34;,&#34;friendly_size_name&#34;:&#34;Tamaño S&#34;,&#34;friendly_size_logo&#34;:&#34;&#34;,&#34;long&#34;:5},{&#34;friendly_size_code&#34;:3,&#34;heigth&#34;:10,&#34;width&#34;:10,&#34;weight&#34;:&#34;500&#34;,&#34;friendly_size_name&#34;:&#34;Tamaño M&#34;,&#34;friendly_size_logo&#34;:&#34;&#34;,&#34;long&#34;:10},{&#34;friendly_size_code&#34;:4,&#34;heigth&#34;:15,&#34;width&#34;:15,&#34;weight&#34;:&#34;1000&#34;,&#34;friendly_size_name&#34;:&#34;Tamaño L&#34;,&#34;friendly_size_logo&#34;:&#34;&#34;,&#34;long&#34;:15},{&#34;friendly_size_code&#34;:5,&#34;heigth&#34;:20,&#34;width&#34;:20,&#34;weight&#34;:&#34;2000&#34;,&#34;friendly_size_name&#34;:&#34;Tamaño XL&#34;,&#34;friendly_size_logo&#34;:&#34;&#34;,&#34;long&#34;:20}]'>
+    </correos-cdk-shipping-starter>
+    
+		</div>
+	</correos-cdk-section-box>
+
+
+  
+  
+
+	
+	
+
+			</section>
+		</correos-cdk-section-automatic-responsive>
+	
+	
+		</div>
+	</correos-cdk-section-box>
+
+</div>
+
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+	</correos-cdk-dual-header>
+	
+
+  
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+<div class="experiencefragment aem-GridColumn aem-GridColumn--default--12">
+<div id="experiencefragment-e13df4b4c9" class="cmp-experiencefragment cmp-experiencefragment--voto-por-correo">
+
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="highlight aem-GridColumn aem-GridColumn--default--12">
+	
+    
+
+	
+
+	
+	
+	
+	<correos-cdk-section-box bg-color="var(--theme-color-white-plain)" center-content="false">
+		<div slot="block">
+
+	<correos-ui-title-center hide-default-margin="true">
+		<h2 slot="h2-title"></h2>
+	</correos-ui-title-center>
+	<correos-cdk-section-text-img variant="variant3070-reverse" distribution="reverse" show-img-mobile="true" img-opacity="false" with-border="false" with-box-shadow="false">
+		<correos-ui-text-inf slot="text" border-color="var(--theme-color-yellow-plain)" bold-features-title="true">
+			<h2 slot="title">Elecciones a Cortes Generales. 23 julio 2023.</h2>
+			<div slot="text"><p><b>La Oficina del Censo Electoral enviará la documentación para el voto por correo al domicilio/ dirección donde se vaya a encontrar el interesado a partir del 3 de julio.</b></p>
+<p>Puedes presentar vía web la solicitud del voto por correo, sin necesidad de acudir presencialmente a una oficina de Correos.</p>
+</div>
+			
+	
+    
+
+	<correos-ui-button slot="linkleft" theme="primary" type="text" href-link="/es/es/particulares/para-el-ciudadano/voto-por-correo" target="_self" element-title="Elecciones a Cortes Generales. 23 julio 2023." component-type="highlight-bannerilustration">
+		<span slot="text">MÁS INFO</span>
+		
+	</correos-ui-button>
+
+			
+	
+    
+
+	
+
+		</correos-ui-text-inf>
+		<correos-cdk-imageblock slot="img" url-image="/content/dam/correos/imagenes/ilustraciones/big/voto_correo_small.svg">
+		</correos-cdk-imageblock>
+	</correos-cdk-section-text-img>
+	
+	
+		</div>
+	</correos-cdk-section-box>
+
+	
+
+	
+	
+	
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+<div class="sectionautomaticresponsive aem-GridColumn aem-GridColumn--default--12">
+	
+    
+
+	
+	
+	
+	
+	<correos-cdk-section-box bg-color="var(--theme-color-white-plain)" full-width="true">
+		<div slot="block">
+
+	
+		
+		
+	
+	
+	
+
+		
+		<correos-cdk-section-automatic-responsive variant="1-2-2" custom-column="false" text-show-less-section="MOSTRAR MENOS" text-aria-show-less-section="Mostrar menos" text-show-more-section="MOSTRAR MÁS" text-aria-show-more-section="Mostrar más">
+			<section slot="components">
+				
+
+
+	
+	
+	
+
+			</section>
+		</correos-cdk-section-automatic-responsive>
+	
+	
+		</div>
+	</correos-cdk-section-box>
+
+</div>
+<div class="sectionautomaticresponsive aem-GridColumn aem-GridColumn--default--12">
+	
+    
+
+	
+	
+	
+	
+	<correos-cdk-section-box bg-color="var(--theme-color-white-plain)" center-content="false" variant="smpadding">
+		<div slot="block">
+
+	
+		
+		
+	
+	<correos-ui-plain-text margin-active="true" color="var(--theme-color-strongGrey)" text-align="left">
+		<h2 slot="plaintext" class="text-h2 font-weight-400 ">
+			Siempre pensando en ti
+		</h2>
+	</correos-ui-plain-text>
+	
+
+		
+		<correos-cdk-section-automatic-responsive variant="1-2-3" custom-column="false">
+			<section slot="components">
+				
+
+
+	
+	
+		
+		
+  
+  <correos-ui-product-quality-card href-link="/es/es/atencion-al-cliente/informacion-aduanera" target-link="_self">
+    
+    
+    	
+	      <img slot="image-mobile" src="/content/dam/correos/imagenes/ilustraciones/ilustraciones-aduanas/ilustraciones_aduanas_2.jpg" alt="ilustraciones aduanas"/>
+		
+    	
+    
+    <h2 slot="title-mobile">Gestión Aduanera</h2>
+    <i slot="icon-mobile" class="icon-arrow_R"></i>
+    <span slot="subtitle-mobile">Infórmate sobre cómo realizar los trámites aduaneros que necesitas.</span>
+
+    
+    	
+	      <img slot="image-desktop" src="/content/dam/correos/imagenes/ilustraciones/ilustraciones-aduanas/ilustraciones_aduanas_2.jpg" alt="ilustraciones aduanas"/>
+    	
+    	
+    
+    <h2 slot="title-desktop">Gestión Aduanera</h2>
+    <p slot="body-text-desktop">Infórmate sobre cómo realizar los trámites aduaneros que necesitas.</p>
+    
+	
+    
+
+	
+
+	
+	
+    
+
+	<correos-ui-button slot="linkleft" theme="secondary" variant="link" type="text" href-link="/es/es/atencion-al-cliente/informacion-aduanera" target="_self" component-title="Siempre pensando en ti" element-title="Gestión Aduanera" component-type="productqualitycard">
+		<span slot="text">MÁS INFO</span>
+		<i slot="icon-right" class="icon-arrow_R"></i>
+	</correos-ui-button>
+
+  </correos-ui-product-quality-card>
+
+
+	
+		
+		
+  
+  <correos-ui-product-quality-card href-link="/es/es/particulares/para-el-ciudadano/servicios-de-la-dgt" target-link="_self">
+    
+    
+    	
+    	
+        	<img slot="image-mobile" src="/content/dam/correos/imagenes/ilustraciones/howto/distintivos_ambientales.svg" alt=""/>
+       	
+    
+    <h2 slot="title-mobile">Trámites de la DGT </h2>
+    <i slot="icon-mobile" class="icon-arrow_R"></i>
+    <span slot="subtitle-mobile">Realiza tus trámites de la DGT online de forma fácil y sencilla o acércate a cualquiera de nuestras oficinas.</span>
+
+    
+    	
+    	
+        	<img slot="image-desktop" src="/content/dam/correos/imagenes/ilustraciones/howto/distintivos_ambientales.svg" alt=""/>
+       	
+    
+    <h2 slot="title-desktop">Trámites de la DGT </h2>
+    <p slot="body-text-desktop">Realiza tus trámites de la DGT online de forma fácil y sencilla o acércate a cualquiera de nuestras oficinas.</p>
+    
+	
+    
+
+	
+
+	
+	
+    
+
+	<correos-ui-button slot="linkleft" theme="secondary" variant="link" type="text" href-link="/es/es/particulares/para-el-ciudadano/servicios-de-la-dgt" target="_self" component-title="Siempre pensando en ti" element-title="Trámites de la DGT " component-type="productqualitycard">
+		<span slot="text">MÁS INFO</span>
+		<i slot="icon-right" class="icon-arrow_R"></i>
+	</correos-ui-button>
+
+  </correos-ui-product-quality-card>
+
+
+	
+		
+		
+  
+  <correos-ui-product-quality-card href-link="/es/es/particulares/para-el-ciudadano/tramites-con-la-administracion-publica/servicios-orve" target-link="_self">
+    
+    
+    	
+    	
+        	<img slot="image-mobile" src="/content/dam/correos/imagenes/ilustraciones/big/aliados_sectores_publicos.svg" alt=""/>
+       	
+    
+    <h2 slot="title-mobile">Trámites con la Administración Pública</h2>
+    <i slot="icon-mobile" class="icon-arrow_R"></i>
+    <span slot="subtitle-mobile">Haz tus trámites de forma rápida y segura.</span>
+
+    
+    	
+    	
+        	<img slot="image-desktop" src="/content/dam/correos/imagenes/ilustraciones/big/aliados_sectores_publicos.svg" alt=""/>
+       	
+    
+    <h2 slot="title-desktop">Trámites con la Administración Pública</h2>
+    <p slot="body-text-desktop">Haz tus trámites de forma rápida y segura.</p>
+    
+	
+    
+
+	
+
+	
+	
+    
+
+	<correos-ui-button slot="linkleft" theme="secondary" variant="link" type="text" href-link="/es/es/particulares/para-el-ciudadano/tramites-con-la-administracion-publica/servicios-orve" target="_self" component-title="Siempre pensando en ti" element-title="Trámites con la Administración Pública" component-type="productqualitycard">
+		<span slot="text">MÁS INFO</span>
+		<i slot="icon-right" class="icon-arrow_R"></i>
+	</correos-ui-button>
+
+  </correos-ui-product-quality-card>
+
+
+	
+	
+
+			</section>
+		</correos-cdk-section-automatic-responsive>
+	
+	
+		</div>
+	</correos-cdk-section-box>
+
+</div>
+<div class="experiencefragment aem-GridColumn aem-GridColumn--default--12">
+<div id="experiencefragment-329faef058" class="cmp-experiencefragment cmp-experiencefragment--reenvio-postal-nacional">
+
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="highlight aem-GridColumn aem-GridColumn--default--12">
+	
+    
+
+	
+	
+
+	
+	
+	
+	<correos-cdk-section-box bg-color="var(--theme-color-white-plain)" full-width="true" center-content="false" variant="lgpadding">
+		<div slot="block">
+
+	<correos-ui-title-center hide-default-margin="true">
+		<h2 slot="h2-title"></h2>
+	</correos-ui-title-center>
+	
+	<correos-cdk-full-content-photo bg-image="/content/dam/correos/imagenes/campañas/reenvio-postal-banner-web-correos-1440x960-V2.jpg" decorator-src="/content/dam/correos/en/imagenes/ilustraciones/trama/deco_03.svg" decorator-alt="" theme="inverse" variant="with-decorator">
+		<div slot="textblock">
+			<correos-ui-text-inf border-color="var(--theme-color-yellow-plain)" bold-features-title="true">
+				<h2 slot="title">Reenvío postal</h2>
+				<div slot="text">Descubre cómo recibir todos tus envíos en tu nuevo domicilio con el servicio de Reenvío postal. ¡Contrátalo ya y no pierdas nada!</div>
+				
+	
+    
+
+	<correos-ui-button slot="linkleft" theme="primary" type="text" href-link="https://www.market.correos.es/product/reenvio-postal-nacional?utm_source=site_cor_ces&amp;utm_medium=banner&amp;utm_campaign=CMk_Jun23_bvaca&amp;utm_term=home&amp;utm_content=part" target="_blank" element-title="Reenvío postal" component-type="highlight-bannerimage">
+		<span slot="text">MÁS INFO</span>
+		
+	</correos-ui-button>
+
+				
+	
+    
+
+	
+
+			</correos-ui-text-inf>
+		</div>
+		
+	</correos-cdk-full-content-photo>
+	
+	
+		</div>
+	</correos-cdk-section-box>
+
+
+
+	
+	
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+<div class="highlight aem-GridColumn aem-GridColumn--default--12">
+	
+    
+
+	
+	
+
+	
+	
+	
+	<correos-cdk-section-box bg-color="var(--theme-color-coolGrey)" full-width="true" variant="smpadding">
+		<div slot="block">
+
+	<correos-ui-title-center hide-default-margin="true">
+		<h2 slot="h2-title"></h2>
+	</correos-ui-title-center>
+	
+	<correos-cdk-full-content-photo bg-image="/content/dam/correos/imagenes/productos/home-particulares.PNG" decorator-src="/content/dam/correos/imagenes/ilustraciones/trama/deco_bars.svg" decorator-alt="" theme="inverse" variant="with-decorator">
+		<div slot="textblock">
+			<correos-ui-text-inf border-color="var(--theme-color-yellow-plain)" bold-features-title="true">
+				<h2 slot="title">¿Estás esperando un envío?</h2>
+				<div slot="text">Aquí encontrarás todo lo que necesitas saber sobre el envío que estás esperando.</div>
+				
+	
+    
+
+	
+
+				
+	
+    
+
+	<correos-ui-button slot="linkleft" theme="secondary" variant="link" type="text" href-link="/es/es/particulares/recibir" target="_self" element-title="¿Estás esperando un envío?" component-type="highlight-bannerimage">
+		<span slot="text">MÁS INFO</span>
+		<i slot="icon-right" class="icon-arrow_R"></i>
+	</correos-ui-button>
+
+			</correos-ui-text-inf>
+		</div>
+		
+	</correos-cdk-full-content-photo>
+	
+	
+		</div>
+	</correos-cdk-section-box>
+
+
+
+	
+	
+</div>
+<div class="highlight aem-GridColumn aem-GridColumn--default--12">
+	
+    
+
+	
+	
+
+	
+	
+	
+	<correos-cdk-section-box bg-color="var(--theme-color-white-plain)" full-width="true" variant="smpadding">
+		<div slot="block">
+
+	<correos-ui-title-center hide-default-margin="true">
+		<h2 slot="h2-title"></h2>
+	</correos-ui-title-center>
+	
+	<correos-cdk-full-content-photo bg-image="/content/dam/correos/imagenes/productos/Sobres-y-cajas.jpg" decorator-src="/content/dam/correos/imagenes/ilustraciones/trama/deco_03.svg" decorator-alt="" variant="with-decorator">
+		<div slot="textblock">
+			<correos-ui-text-inf border-color="var(--theme-color-yellow-plain)" bold-features-title="true">
+				<h2 slot="title">¿Quieres hacer un envío?</h2>
+				<div slot="text">Todo lo que necesitas saber para realizar un envío del tipo que sea.</div>
+				
+	
+    
+
+	
+
+				
+	
+    
+
+	<correos-ui-button slot="linkleft" theme="secondary" variant="link" type="text" href-link="/es/es/particulares/enviar" target="_self" element-title="¿Quieres hacer un envío?" component-type="highlight-bannerimage">
+		<span slot="text">MÁS INFO</span>
+		<i slot="icon-right" class="icon-arrow_R"></i>
+	</correos-ui-button>
+
+			</correos-ui-text-inf>
+		</div>
+		
+	</correos-cdk-full-content-photo>
+	
+	
+		</div>
+	</correos-cdk-section-box>
+
+
+
+	
+	
+</div>
+<div class="highlight aem-GridColumn aem-GridColumn--default--12">
+	
+    
+
+	
+
+	
+	
+	
+	<correos-cdk-section-box bg-color="var(--theme-color-yellow-plain)" center-content="false" variant="smpadding">
+		<div slot="block">
+
+	<correos-ui-title-center hide-default-margin="true">
+		<h2 slot="h2-title"></h2>
+	</correos-ui-title-center>
+	<correos-cdk-section-text-img variant="variant6040-normal" distribution="normal" show-img-mobile="true" img-opacity="false" with-border="false" with-box-shadow="false">
+		<correos-ui-text-inf slot="text" border-color="var(--theme-color-yellow-plain)" bold-features-title="true">
+			<h2 slot="title">Compra en nuestra tienda online</h2>
+			<div slot="text">Compra online todo lo necesario para tus envíos postales (sobres, embalajes, sellos, etc.). Además, disponemos de artículos para amantes de la filatelia, productos de Correos y regalos para sorprender a los que más quieres.</div>
+			
+	
+    
+
+	
+
+			
+	
+    
+
+	<correos-ui-button slot="linkleft" theme="secondary" variant="link" type="text" href-link="https://market.correos.es/category/correos" target="_blank" element-title="Compra en nuestra tienda online" component-type="highlight-bannerilustration">
+		<span slot="text">MÁS INFO</span>
+		<i slot="icon-right" class="icon-arrow_R"></i>
+	</correos-ui-button>
+
+		</correos-ui-text-inf>
+		<correos-cdk-imageblock slot="img" url-image="/content/dam/correos/imagenes/ilustraciones/big/ecommerce.svg">
+		</correos-cdk-imageblock>
+	</correos-cdk-section-text-img>
+	
+	
+		</div>
+	</correos-cdk-section-box>
+
+	
+
+	
+	
+	
+</div>
+<div class="highlight aem-GridColumn aem-GridColumn--default--12">
+	
+    
+
+	
+	
+	
+	
+</div>
+<div class="sectionautomaticresponsive aem-GridColumn aem-GridColumn--default--12">
+	
+    
+
+	
+	
+	
+	
+	<correos-cdk-section-box bg-color="var(--theme-color-white-plain)" variant="smpadding">
+		<div slot="block">
+
+	
+		
+		
+	
+	
+	
+
+		
+		<correos-cdk-section-automatic-responsive variant="1-2-2" custom-column="false">
+			<section slot="components">
+				
+
+
+	
+	
+		
+		
+	
+    
+
+	<correos-ui-content-module>
+		
+		
+			<img slot="img-header" src="/content/dam/correos/imagenes/productos/Agentes-turísticos.jpg" alt=""/>
+		
+		<h3 slot="title">Viaja y disfruta con Correos </h3>
+		<p slot="paragraph">
+			En Correos te acompañamos en toda tu experiencia del Camino de Santiago para que puedas disfrutar al máximo. Descubre todo tipo de experiencias, viajes y regalos que tenemos para ti, además te llevamos a casa los productos que compres en nuestra web. 
+		</p>
+		
+	
+    
+
+	<correos-ui-button slot="link" theme="secondary" variant="link" type="text" href-link="https://www.correos.es/es/es/particulares/ocio-y-viajes" target="_self" element-title="Viaja y disfruta con Correos " component-type="contentmodule">
+		<span slot="text">MÁS INFO</span>
+		<i slot="icon-right" class="icon-arrow_R"></i>
+	</correos-ui-button>
+
+	</correos-ui-content-module>
+	
+	
+		
+		
+	
+    
+
+	<correos-ui-content-module>
+		
+		
+			<img slot="img-header" src="/content/dam/correos/imagenes/productos/Oficina_2_OK.jpg" alt=""/>
+		
+		<h3 slot="title">¿Quieres comprar en nuestras tiendas o enviar dinero?</h3>
+		<p slot="paragraph">
+			Tenemos todo tipo de productos que te ayudarán a realizar estas gestiones más fácilmente.
+		</p>
+		
+	
+    
+
+	<correos-ui-button slot="link" theme="secondary" variant="link" type="text" href-link="/es/es/particulares/dinero-y-compras" target="_self" element-title="¿Quieres comprar en nuestras tiendas o enviar dinero?" component-type="contentmodule">
+		<span slot="text">MÁS INFO</span>
+		<i slot="icon-right" class="icon-arrow_R"></i>
+	</correos-ui-button>
+
+	</correos-ui-content-module>
+	
+	
+	
+
+			</section>
+		</correos-cdk-section-automatic-responsive>
+	
+	
+		</div>
+	</correos-cdk-section-box>
+
+</div>
+<div class="experiencefragment aem-GridColumn aem-GridColumn--default--12">
+<div id="experiencefragment-78af7c0b03" class="cmp-experiencefragment cmp-experiencefragment--banner-blog">
+
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="highlight aem-GridColumn aem-GridColumn--default--12">
+	
+    
+
+	
+	
+
+	
+	
+	
+	<correos-cdk-section-box bg-color="var(--theme-color-white-plain)" full-width="true" center-content="false" variant="smpadding">
+		<div slot="block">
+
+	<correos-ui-title-center hide-default-margin="true">
+		<h2 slot="h2-title"></h2>
+	</correos-ui-title-center>
+	
+	<correos-cdk-full-content-photo bg-image="/content/dam/correos/imagenes/blog/2022/ilustracion-blog-1440x960.jpg" decorator-src="/content/dam/correos/imagenes/ilustraciones/trama/deco_03.svg" decorator-alt="" theme="inverse" variant="with-decorator">
+		<div slot="textblock">
+			<correos-ui-text-inf border-color="var(--theme-color-yellow-plain)" bold-features-title="true">
+				<h2 slot="title">Descubre Actualidad, el Blog de Correos  </h2>
+				<div slot="text">Noticias, lanzamientos, servicios, curiosidades, consejos... En Correos no queremos que te pierdas nada, así que hemos pensado mucho lo que más puede ayudarte en tu día a día para que nuestro blog tenga una utilidad real. ¿Te apuntas a leerlo?</div>
+				
+	
+    
+
+	
+
+				
+	
+    
+
+	<correos-ui-button slot="linkleft" theme="secondary" variant="link" type="text" href-link="/es/es/actualidad" target="_self" element-title="Descubre Actualidad, el Blog de Correos  " component-type="highlight-bannerimage">
+		<span slot="text">¡QUIERO LEERLO!</span>
+		<i slot="icon-right" class="icon-arrow_R"></i>
+	</correos-ui-button>
+
+			</correos-ui-text-inf>
+		</div>
+		
+	</correos-cdk-full-content-photo>
+	
+	
+		</div>
+	</correos-cdk-section-box>
+
+
+
+	
+	
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+<div class="highlight aem-GridColumn aem-GridColumn--default--12">
+	
+    
+
+	
+	
+
+	
+	
+	
+	<correos-cdk-section-box bg-color="var(--theme-color-coolGrey)" full-width="true" center-content="false" variant="smpadding">
+		<div slot="block">
+
+	<correos-ui-title-center hide-default-margin="true">
+		<h2 slot="h2-title"></h2>
+	</correos-ui-title-center>
+	
+	<correos-cdk-full-content-photo bg-image="/content/dam/correos/imagenes/productos/filatelia_OK.jpg" decorator-src="/content/dam/correos/imagenes/ilustraciones/trama/deco_bars.svg" decorator-alt="" variant="with-decorator">
+		<div slot="textblock">
+			<correos-ui-text-inf border-color="var(--theme-color-yellow-plain)" bold-features-title="true">
+				<h2 slot="title">Filatelia más que coleccionismo</h2>
+				<div slot="text">Hazte abonado, diseña tus sellos y descubre  más productos filatélicos.
+</div>
+				
+	
+    
+
+	
+
+				
+	
+    
+
+	<correos-ui-button slot="linkleft" theme="secondary" variant="link" type="text" href-link="/es/es/particulares/ocio-y-viajes/sellos-y-filatelia" target="_self" element-title="Filatelia más que coleccionismo" component-type="highlight-bannerimage">
+		<span slot="text">MÁS INFO</span>
+		<i slot="icon-right" class="icon-arrow_R"></i>
+	</correos-ui-button>
+
+			</correos-ui-text-inf>
+		</div>
+		
+	</correos-cdk-full-content-photo>
+	
+	
+		</div>
+	</correos-cdk-section-box>
+
+
+
+	
+	
+</div>
+
+    
+</div>
+</div>
+<div class="experiencefragment aem-GridColumn aem-GridColumn--default--12">
+<div id="experiencefragment-d6f9248051" class="cmp-experiencefragment cmp-experiencefragment--footer">
+
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="corefooter aem-GridColumn aem-GridColumn--default--12">
+	<correos-cdk-core-footer text-footer="©Sociedad Estatal Correos y Telegrafos, S.A., S.M.E. Todos los derechos reservados." lite-version="false" rrss-version="false" img-footer="/content/dam/correos/imagenes/iconos/pie/ico-splash.svg" alt-footer="Correos" links-list='[{&#34;targetLink&#34;:&#34;_self&#34;,&#34;textLink&#34;:&#34;Política de cookies&#34;,&#34;titleLink&#34;:&#34;Ir a Política de cookies&#34;,&#34;urlLink&#34;:&#34;/es/es/legales/politica-de-cookies&#34;},{&#34;targetLink&#34;:&#34;_self&#34;,&#34;textLink&#34;:&#34;Aviso legal&#34;,&#34;titleLink&#34;:&#34;Ir a Aviso legal&#34;,&#34;urlLink&#34;:&#34;/es/es/legales/aviso-legal&#34;},{&#34;targetLink&#34;:&#34;_self&#34;,&#34;textLink&#34;:&#34;Privacidad web&#34;,&#34;titleLink&#34;:&#34;Ir a Privacidad web&#34;,&#34;urlLink&#34;:&#34;/es/es/legales/privacidad-web&#34;},{&#34;targetLink&#34;:&#34;_self&#34;,&#34;textLink&#34;:&#34;Alerta seguridad&#34;,&#34;titleLink&#34;:&#34;Ir a Alerta seguridad&#34;,&#34;urlLink&#34;:&#34;/es/es/legales/alerta-de-seguridad&#34;},{&#34;targetLink&#34;:&#34;_self&#34;,&#34;textLink&#34;:&#34;Accesibilidad&#34;,&#34;titleLink&#34;:&#34;Ir a Accesibilidad&#34;,&#34;urlLink&#34;:&#34;/es/es/legales/accesibilidad&#34;},{&#34;targetLink&#34;:&#34;_self&#34;,&#34;textLink&#34;:&#34;Canal ético&#34;,&#34;titleLink&#34;:&#34;Ir a Canal ético&#34;,&#34;urlLink&#34;:&#34;/es/es/legales/canal-etico&#34;}]' prepay-section='{&#34;image&#34;:{}}' item-list='[{&#34;textTitle&#34;:&#34;Para ti &#34;,&#34;links&#34;:[{&#34;targetLink&#34;:&#34;_self&#34;,&#34;textLink&#34;:&#34;Seguimiento de envío&#34;,&#34;titleLink&#34;:&#34;Ir a Seguimiento de envío&#34;,&#34;hrefLink&#34;:&#34;/es/es/herramientas/localizador/envios&#34;},{&#34;targetLink&#34;:&#34;_self&#34;,&#34;textLink&#34;:&#34;Recibir&#34;,&#34;titleLink&#34;:&#34;Ir a Recibir&#34;,&#34;hrefLink&#34;:&#34;/es/es/particulares/recibir&#34;},{&#34;targetLink&#34;:&#34;_self&#34;,&#34;textLink&#34;:&#34;Enviar&#34;,&#34;titleLink&#34;:&#34;Ir a Enviar&#34;,&#34;hrefLink&#34;:&#34;/es/es/particulares/enviar&#34;}]},{&#34;textTitle&#34;:&#34;Para tu empresa&#34;,&#34;links&#34;:[{&#34;targetLink&#34;:&#34;_self&#34;,&#34;textLink&#34;:&#34;Enviar&#34;,&#34;titleLink&#34;:&#34;Ir a Enviar&#34;,&#34;hrefLink&#34;:&#34;/es/es/empresas/enviar&#34;},{&#34;targetLink&#34;:&#34;_self&#34;,&#34;textLink&#34;:&#34;Ecommerce&#34;,&#34;titleLink&#34;:&#34;Ir a Ecommerce&#34;,&#34;hrefLink&#34;:&#34;/es/es/empresas/ecommerce&#34;},{&#34;targetLink&#34;:&#34;_self&#34;,&#34;textLink&#34;:&#34;Marketing&#34;,&#34;titleLink&#34;:&#34;Ir a Marketing&#34;,&#34;hrefLink&#34;:&#34;/es/es/empresas/marketing&#34;}]},{&#34;textTitle&#34;:&#34;Para tu interés&#34;,&#34;links&#34;:[{&#34;targetLink&#34;:&#34;_blank&#34;,&#34;textLink&#34;:&#34;Filatelia&#34;,&#34;titleLink&#34;:&#34;Ir a Filatelia&#34;,&#34;hrefLink&#34;:&#34;/es/es/particulares/ocio-y-viajes/sellos-y-filatelia&#34;},{&#34;targetLink&#34;:&#34;_blank&#34;,&#34;textLink&#34;:&#34;Correos Market&#34;,&#34;titleLink&#34;:&#34;Ir a Correos Market&#34;,&#34;hrefLink&#34;:&#34;https://www.market.correos.es/&#34;},{&#34;targetLink&#34;:&#34;_blank&#34;,&#34;textLink&#34;:&#34;Web institucional&#34;,&#34;titleLink&#34;:&#34;Ir a Web institucional&#34;,&#34;hrefLink&#34;:&#34;https://www.correos.com/?_ga=2.48058663.1272337042.1602486055-1925384938.1602155804&#34;}]}]' special-list='[{&#34;rrssTitle&#34;:&#34;&#34;,&#34;linksIcon&#34;:[{&#34;targetLink&#34;:&#34;_blank&#34;,&#34;icon&#34;:&#34;icon-facebook&#34;,&#34;labelLink&#34;:&#34;Ir a Ir a Facebook&#34;,&#34;hrefLink&#34;:&#34;https://www.facebook.com/correos.es&#34;},{&#34;targetLink&#34;:&#34;_blank&#34;,&#34;icon&#34;:&#34;icon-instagram&#34;,&#34;labelLink&#34;:&#34;Ir a Ir a Instagram&#34;,&#34;hrefLink&#34;:&#34;https://www.instagram.com/correos/&#34;},{&#34;targetLink&#34;:&#34;_blank&#34;,&#34;icon&#34;:&#34;icon-twitter&#34;,&#34;labelLink&#34;:&#34;Ir a Ir a Twitter&#34;,&#34;hrefLink&#34;:&#34;https://twitter.com/correos&#34;},{&#34;targetLink&#34;:&#34;_blank&#34;,&#34;icon&#34;:&#34;icon-linkedin&#34;,&#34;labelLink&#34;:&#34;Ir a Ir a Linkedin&#34;,&#34;hrefLink&#34;:&#34;https://www.linkedin.com/company/correos/&#34;},{&#34;targetLink&#34;:&#34;_blank&#34;,&#34;icon&#34;:&#34;icon-youtube&#34;,&#34;labelLink&#34;:&#34;Ir a Ir a Youtube&#34;,&#34;hrefLink&#34;:&#34;https://www.youtube.com/user/CanalCorreos&#34;}],&#34;icon&#34;:&#34;icon-contact&#34;,&#34;links&#34;:[{&#34;targetLink&#34;:&#34;_self&#34;,&#34;textLink&#34;:&#34;Atención al cliente&#34;,&#34;titleLink&#34;:&#34;Ir a Atención al cliente&#34;,&#34;hrefLink&#34;:&#34;/es/es/atencion-al-cliente&#34;},{&#34;targetLink&#34;:&#34;_self&#34;,&#34;textLink&#34;:&#34;Encuentra tu oficina&#34;,&#34;titleLink&#34;:&#34;Ir a Encuentra tu oficina&#34;,&#34;hrefLink&#34;:&#34;/es/es/herramientas/oficinas-buzones-citypaq/detalle&#34;}]}]' app-list='[{&#34;textTitle&#34;:&#34;Descarga la App de Correos&#34;,&#34;buttons&#34;:[{&#34;targetLink&#34;:&#34;_blank&#34;,&#34;imageURL&#34;:&#34;/content/dam/correos/imagenes/iconos/home/apps/apple_store.jpg&#34;,&#34;imageAlt&#34;:&#34;App Store&#34;,&#34;titleLink&#34;:&#34;Ir a Ir a App Store&#34;,&#34;hrefLink&#34;:&#34;https://apps.apple.com/app/correos-info/id486322953&#34;},{&#34;targetLink&#34;:&#34;_blank&#34;,&#34;imageURL&#34;:&#34;/content/dam/correos/imagenes/iconos/home/apps/google_play.jpg&#34;,&#34;imageAlt&#34;:&#34;Google Play&#34;,&#34;titleLink&#34;:&#34;Ir a Ir a Google Play&#34;,&#34;hrefLink&#34;:&#34;https://play.google.com/store/apps/details?id=es.correos.widget&amp;hl=es&#34;},{&#34;targetLink&#34;:&#34;_blank&#34;,&#34;imageURL&#34;:&#34;/content/dam/correos/imagenes/ilustraciones/logos/huawei.svg&#34;,&#34;imageAlt&#34;:&#34;Haweii&#34;,&#34;titleLink&#34;:&#34;Ir a Ir a Haweii&#34;,&#34;hrefLink&#34;:&#34;https://appgallery.huawei.com/#/app/C102638007?pkgName=es.correos.widget&amp;channelId=i&amp;referrer=&amp;detailType=0&amp;callType=AGDLINK&#34;}]}]' pay-list='[{&#34;payImage&#34;:[{&#34;imageURL&#34;:&#34;/content/dam/prepago/imagenes/logos/logo-mastercard.png&#34;,&#34;imageAlt&#34;:&#34;MasterCard&#34;},{&#34;imageURL&#34;:&#34;/content/dam/correos/imagenes/iconos/pie/paypal.svg.svg&#34;,&#34;imageAlt&#34;:&#34;PayPal&#34;},{&#34;imageURL&#34;:&#34;/content/dam/correos/imagenes/iconos/pie/maestro.svg&#34;,&#34;imageAlt&#34;:&#34;Maestro&#34;},{&#34;imageURL&#34;:&#34;/content/dam/correos/imagenes/iconos/pie/visa.svg&#34;,&#34;imageAlt&#34;:&#34;Visa&#34;},{&#34;imageURL&#34;:&#34;/content/dam/correos/imagenes/iconos/pie/log amex.svg&#34;,&#34;imageAlt&#34;:&#34;American Express&#34;}],&#34;textTitle&#34;:&#34;Métodos de pago&#34;}]' certificate-list='[{&#34;textTitle&#34;:&#34;Certificados&#34;,&#34;certificate&#34;:[{&#34;isLink&#34;:false,&#34;imageURL&#34;:&#34;/content/dam/correos/imagenes/iconos/pie/w3c.svg&#34;,&#34;imageAlt&#34;:&#34;w3c&#34;}]}]' contact-module-literals='[]' newsletter-literals='[]' method-form="POST" action-form="/digital-services/recruimentforms/api/v1/" hostname="https://api1.correos.es" modal-error="modal-error" modal-success="modal-success">
+	</correos-cdk-core-footer>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+<div class="experiencefragment aem-GridColumn aem-GridColumn--default--12">
+<div id="experiencefragment-ad608df848" class="cmp-experiencefragment cmp-experiencefragment--cookies">
+
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="cookiesmodule aem-GridColumn aem-GridColumn--default--12">
+	
+    
+
+	<correos-cdk-cookies-module name-cookie="correosCookies" desc-cookies='&lt;span>Esta página web, propiedad de Correos, utiliza cookies propias y de terceros con la finalidad de permitir su navegación y servir publicidad personalizada. Puedes hacer clic en Aceptar para permitir el uso de todas las cookies. También puedes rechazar todas, o elegir qué tipo de cookies deseas aceptar o rechazar, mediante la opción Configurar Cookies. La aceptación incluye su consentimiento para la instalación en su navegador de la cookie Adobe Analytics, la cual podría implicar el tratamiento de datos en EE.U.U., a un país que no podría garantizar un nivel adecuado de protección de sus datos. Puedes obtener más información en nuestra&amp;nbsp;&lt;/span>&lt;a href=&#34;https://www.correos.es/es/es/legales/politica-de-cookies&#34; target=&#34;_self&#34;>Política de cookies.&lt;/a>&lt;br>
+' text-first-button="CONFIGURAR" label-first-button="Configurar cookies" text-second-button="ACEPTAR" label-second-button="Aceptar todas las cookies" title-modal="Configuración de Cookies" modal-id="AvisoCookies" list-cookies='[{&#34;nameDesc&#34;:&#34;tecnicas&#34;,&#34;subtitle&#34;:&#34;(Cookies estrictamente necesarias)&#34;,&#34;disabled&#34;:true,&#34;title&#34;:&#34;Cookies técnicas y de personalización&#34;,&#34;isActive&#34;:true,&#34;desc&#34;:&#34;Permiten la navegación a través de nuestra web y ejecutar la acción solicitada por el usuario. Por ejemplo, permitir la reproducción de contenido multimedia, registrar sus pedidos en el carrito de compra, reconocer inicios de sesión y la selección de idioma en función del lugar de acceso, etc.&#34;},{&#34;nameDesc&#34;:&#34;analiticas&#34;,&#34;subtitle&#34;:&#34;&#34;,&#34;disabled&#34;:false,&#34;title&#34;:&#34;Cookies analíticas&#34;,&#34;isActive&#34;:false,&#34;desc&#34;:&#34;La utilización de Adobe Analytics puede suponer la existencia de una transferencia internacional de datos. La aceptación de esta tipología de cookies supone aceptar voluntariamente el tratamiento de datos anteriormente mencionado. Esto incluye, su consentimiento de acuerdo con el Artículo 49.1 a) del RGPD para el tratamiento de datos fuera del EEE, concretamente a E.E.U.U., país que no garantiza un nivel adecuado de protección de datos similar al que se garantiza en el RGPD. Concretamente, la utilización de Adobe Analytics podría derivar en un tratamiento de sus datos por parte de autoridades de inteligencia de los E.E.U.U. Le recordamos que puede revocar su consentimiento en cualquier momento siguiendo las indicaciones para borrar las cookies que se especifican a continuación. Igualmente puede volver a configurar las cookies y aceptar o rechazarlas según estime oportuno. Este tipo de cookies ofrecen distintas métricas de uso de la web que nos permiten mejorar la navegación del usuario, conocer qué apartados de la web resultan más atractivos, desde dónde acceden los usuarios, etc. Se trata información de carácter estadístico y que es proporcionada a nivel agregado, salvo por el registro de la dirección IP desde la que accede.&#34;},{&#34;nameDesc&#34;:&#34;publicidad&#34;,&#34;subtitle&#34;:&#34;&#34;,&#34;disabled&#34;:false,&#34;title&#34;:&#34;Cookies de publicidad comportamental&#34;,&#34;isActive&#34;:false,&#34;desc&#34;:&#34;Permiten la gestión de los espacios publicitarios de nuestra página web ofreciendo productos o servicios ajustados a sus hábitos de navegación y su perfil y ofrecerle publicidad personalizada en espacios publicitarios ubicados fuera de nuestra página web. Si no acepta el uso de estas cookies, seguirá mostrándose publicidad, pero será genérica y no personalizada.&#34;}]' text-modal-footer='Puedes obtener más información en nuestra &lt;a href=&#34;/content/correos/es/es/legales/politica-de-cookies.html&#34; target=&#34;_self&#34;>Política de Cookies&lt;/a>.' text-first-button-modal="GUARDAR Y CERRAR" text-second-button-modal="PERMITIR TODO" text-third-button-modal="RECHAZAR TODAS" text-switch-active="Activo" text-switch-not-active="Inactivo" text-switch-obligatory="Obligatorio" show-component-contribution="false" show-component-display="true">
+	</correos-cdk-cookies-module>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+
+
+            
+    
+    
+<script src="/etc.clientlibs/correos/clientlibs/clientlib-site.min.d41d8cd98f00b204e9800998ecf8427e.js"></script>
+<script src="/etc.clientlibs/correos/clientlibs/clientlib-provider-correosid.min.ed8e3f9c92c02f27ac1f60e6503eb3e8.js"></script>
+
+
+
+    
+
+    
+    
+<script src="/etc.clientlibs/core/wcm/components/commons/site/clientlibs/container.min.c8339545b501e3db3abc37c9a4cc2d6e.js"></script>
+<script src="/etc.clientlibs/correos/clientlibs/clientlib-base.min.feb81eecdf02940147053bfca46854cd.js"></script>
+
+
+
+
+
+    
+
+    
+
+    
+    
+    
+
+            
+
+        
+        
+    </body>
+</html>
