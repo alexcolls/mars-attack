@@ -1,0 +1,1 @@
+mitmproxy2swagger -i ./flows -o spec.yml -p https://mioficina.correos.es
