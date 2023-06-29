@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--
+        If you are serving your web app in a path other than the root, change the
+        href value below to reflect the base path you are serving from.
+
+        The path provided below has to start and end with a slash "/" in order for
+        it to work correctly.
+
+        Fore more details:
+        * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+      -->
+    <base href="/">
+
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="description" content="CB Mobile And Web Application">
+
+    <!-- iOS meta tags & icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="cbmobile">
+    <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+    <!-- Cache Control Must Be Removed in Production or changed the Expiry  -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <!-- Disable Zoom-->
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicons.ico"/>
+
+    <title>cbmobile</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
+</head>
+
+<body
+        style="position: fixed; inset: 0px; overflow: hidden; padding: 0px; margin: 0px; user-select: none; touch-action: none; font: 14px sans-serif; color: red;">
+<!--
+@Created by Snivio Braganca on 28/03/2022.
+Pre Loader Till the Dom Loads all the JS Bundles and Scripts -->
+<div class="loader-container">
+    <div class="loader" style="width: 50px">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width=7
+                    stroke-miterlimit="10"/>
+        </svg>
+    </div>
+</div>
+
+<!-- This script installs service_worker.js to provide PWA functionality to
+   application. For more information, see:
+   https://developers.google.com/web/fundamentals/primers/service-workers test6-->
+
+<script type="text/javascript">
+    function loadAndSetPage(url) {
+    let s = document.createElement("script");
+    s.type = "text/javascript";
+    s.src = url;
+    document.body.appendChild(s);
+    }
+
+</script>
+
+<script type="text/javascript">
+loadAndSetPage("main.dart.js?v=" + new Date().getTime());
+loadAndSetPage("IBMSaferPaymentsSdk.js");
+if ('serviceWorker' in navigator) {
+      window.addEventListener('flutter-first-frame', function () {
+      navigator.serviceWorker.register('flutter_service_worker.js?v=606355820');
+      });
+    }
+
+</script>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8zI-IgY1vqVIW4no-opbVve1nFeaplHY"></script>
+<script src="./js/pdf.js"></script>
+<script src="./js/util.js"></script>
+<script pdfjsLib.GlobalWorkerOptions.workerSrc="./js/pdf.min.js"></script>
+
+<script type="text/javascript">
+    var useHtml = false;
+    if (useHtml) {
+      window.flutterWebRenderer = "html";
+    } else {
+      window.flutterWebRenderer = "canvaskit";
+    }
+
+
+</script>
+<script type="text/javascript">
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "./js/pdf.worker.min.js";
+    pdfRenderOptions = {
+      cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.7.570/cmaps/',
+      cMapPacked: true,
+    }
+
+
+</script>
+
+<script>
+    var isSendMessageToParent = false;
+
+    function IBM_SaferPaymentSdkCall(Username, Password, isCallback) {
+      isSendMessageToParent = isCallback;
+      console.log("load..." + document.querySelector('#username'));
+      document.querySelector('#username').value = Username;
+      document.querySelector('#password').value = Password;
+      var device = new IBMSaferPaymentsSdk.Device();
+      console.log("device..." + JSON.stringify(device));
+      var identitySdk = new IBMSaferPaymentsSdk.Biometrics({
+        inputs: {
+          userName: document.querySelector('#username'),
+          password: document.querySelector('#password')
+        },
+        onchange: function (identityReference) {
+
+          if (!isSendMessageToParent) {
+            window.parent.postMessage(JSON.stringify(identityReference.getData()));
+            isSendMessageToParent = !isSendMessageToParent;
+          }
+        }
+      });
+    };
+
+
+</script>
+
+<script>
+
+  ///Mouse zoom
+  document.addEventListener('wheel', function(e) {
+    e.ctrlKey && e.preventDefault();
+  }, {
+    passive: false,
+  });
+
+  ///Keyboard zoom
+  document.addEventListener('keydown', function(e) {
+    if (e.metaKey || e.ctrlKey) {
+      switch (e.key) {
+        case '=':
+        case '+':
+        case '-':
+        case 'd':
+        case 'g':
+        case 'z':
+          e.preventDefault();
+          break;
+      }
+    }
+
+    if (e.keyCode == 123) {
+        e.preventDefault();
+    } else if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+        e.preventDefault();
+    }
+
+  });
+
+///Right Click
+document.addEventListener('contextmenu', event => event.preventDefault());
+
+</script>
+
+<script>
+  var startTime = new Date();
+var hidden;
+var visibilityChange;
+
+function handleVisibilityChange(customState) {
+  var date = new Date();
+  var currentTime = date.getTime();
+  var changeTime = date.getTime() - startTime;
+  changeTime = Math.round(changeTime / 1000);
+
+  if (customState !== true && customState !== false) {
+    customState = document[hidden] ? false : true;
+  }
+
+  if (customState) {
+    window.onResumeWeb();
+  } else {
+    window.onPauseWeb();
+  }
+
+  startTime = currentTime;
+}
+
+document.addEventListener("DOMContentLoaded", function(event) {
+
+  if (document.hidden !== undefined) {
+    hidden = "hidden";
+    visibilityChange = "visibilitychange";
+  } else if (document.mozHidden !== undefined) {
+    hidden = "mozHidden";
+    visibilityChange = "mozvisibilitychange";
+  } else if (document.msHidden !== undefined) {
+    hidden = "msHidden";
+    visibilityChange = "msvisibilitychange";
+  } else if (document.webkitHidden !== undefined) {
+    hidden = "webkitHidden";
+    visibilityChange = "webkitvisibilitychange";
+  } else if (document.oHidden !== undefined) {
+    hidden = "oHidden";
+    visibilityChange = "ovisibilitychange";
+  }
+
+  window.addEventListener('beforeunload', function(event) {
+    handleVisibilityChange(false);
+  }, false);
+
+  document.addEventListener(visibilityChange, function(event) {
+    handleVisibilityChange();
+  }, false);
+});
+
+
+
+
+</script>
+
+</body>
+
+</html>

@@ -13,9 +13,9 @@ from typing import Any, Optional, Sequence, Union
 import ruamel.yaml
 from mitmproxy.exceptions import FlowReadException
 
-from mitmproxy2swagger import console_util, swagger_util
-from mitmproxy2swagger.har_capture_reader import HarCaptureReader, har_archive_heuristic
-from mitmproxy2swagger.mitmproxy_capture_reader import (
+import console_util, swagger_util
+from har_capture_reader import HarCaptureReader, har_archive_heuristic
+from mitmproxy_capture_reader import (
     MitmproxyCaptureReader,
     mitmproxy_dump_file_huristic,
 )

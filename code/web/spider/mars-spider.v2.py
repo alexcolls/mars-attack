@@ -10,7 +10,8 @@ def download_website(url, folder_path):
     # Create the folder if it doesn't exist
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
-
+    cert = certifi.where()
+    print(cert)
     # SSL certificate handling using certifi
     ssl_context = ssl.create_default_context(cafile=certifi.where())
 
@@ -45,6 +46,6 @@ def download_website(url, folder_path):
                 print(f"Downloaded: {dependency_file_path}")
 
 # Example usage
-website_url = "https://correos.es/es/es/particulares"  # Replace with the website URL you want to download
-output_folder = "website"  # Replace with the desired output folder path
+website_url = input("Insert url: ")  # Replace with the website URL you want to download
+output_folder = input("Insert output folder: ")  # Replace with the desired output folder path
 download_website(website_url, output_folder)

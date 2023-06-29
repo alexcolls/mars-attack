@@ -110,10 +110,13 @@ class HarCaptureReader:
         har_file_size = os.path.getsize(self.file_path)
         with open(self.file_path, "r", encoding="utf-8") as f:
             data = json_stream.load(f)
-            for entry in data["log"]["entries"].persistent():
-                if self.progress_callback:
-                    self.progress_callback(f.tell() / har_file_size)
-                yield HarFlowWrapper(entry)
+            try:
+                for entry in data["log"]["entries"].persistent():
+                    if self.progress_callback:
+                        self.progress_callback(f.tell() / har_file_size)
+                    yield HarFlowWrapper(entry)
+            except Exception as e:
+                 print(e)
 
     def name(self):
         return "har"
